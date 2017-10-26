@@ -39,25 +39,31 @@ class CMatrix{
     CMatrix operator/(CMatrix& m);
     CMatrix operator/(double d);
     CMatrix operator++();
-     //Pre IncrementCMatrix operator++(int);
-      //Post Increment, int is not usedCMatrix operator--();
-       //Pre IncrementCMatrix operator--(int);
-        //Post Increment, int is not usedCMatrix operator-();
-        CMatrix operator+();
-        friend istream& operator >> (istream &is, CMatrix& C);
-         //Streamfriend ostream& operator << (ostream &os, CMatrix& C);
-          //Streamvoid setSubMatrix(int iR, int iC, CMatrix& m);
-          CMatrix getSubMatrix(int r, int c, int nr, int nc);
-          CMatrix getCofactor(int r, int c);
-          void addColumn(CMatrix& m);
-          void addRow(CMatrix& m);
-          double& operator[](int i){return values[i/nC][i%nC];}
-          double& operator()(int i){return values[i/nC][i%nC];}
-          double& operator()(int r, int c){return values[r][c];}
-          int getn(){return nR*nC;};
-          int getnR(){return nR;};
-              int getnC(){return nC;};
-              double getDeterminant();
-              double getTranspose();
-              double getInverse();
-              };
+     //Pre Increment
+	CMatrix operator++(int);
+     //Post Increment, int is not used
+	CMatrix operator--();
+     //Pre Increment
+	CMatrix operator--(int);
+     //Post Increment, int is not used
+	CMatrix operator-();
+    CMatrix operator+();
+    friend istream& operator >> (istream &is, CMatrix& C);
+     //Stream
+	friend ostream& operator << (ostream &os, CMatrix& C);
+     //Stream
+	void setSubMatrix(int iR, int iC, CMatrix& m);
+    CMatrix getSubMatrix(int r, int c, int nr, int nc);
+    CMatrix getCofactor(int r, int c);
+    void addColumn(CMatrix& m);
+    void addRow(CMatrix& m);
+    double& operator[](int i){return values[i/nC][i%nC];}
+    double& operator()(int i){return values[i/nC][i%nC];}
+    double& operator()(int r, int c){return values[r][c];}
+    int getn(){return nR*nC;};
+    int getnR(){return nR;};
+    int getnC(){return nC;};
+    double getDeterminant();
+    double getTranspose();
+    double getInverse();
+};
