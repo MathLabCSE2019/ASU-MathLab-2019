@@ -1,3 +1,5 @@
+#include <iostream>
+#include <string>
 class CMatrix{
     int nR, nC;
     double** values;
