@@ -8,6 +8,7 @@ class CMatrix{
     ~CMatrix();
     enum MI{MI_ZEROS, MI_ONES, MI_EYE, MI_RAND, MI_VALUE};
     CMatrix(int nR, int nC, int initialization = MI_ZEROS, double initializationValue = 0.0);
+    CMatrix(int nR, int nC, double **values);
     CMatrix(int nR, int nC, double first, ...);
     CMatrix(CMatrix& m);
     CMatrix(double d);
