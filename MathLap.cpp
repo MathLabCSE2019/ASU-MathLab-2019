@@ -463,3 +463,11 @@ CMatrix CMatrix::power(int x)
      return result_matrix;
 }
 
+///////matrix power operator///////////////
+CMatrix CMatrix::operator^(int x)
+{
+    CMatrix f;
+  f=(*this).power(x);
+    return f ;
+}
+

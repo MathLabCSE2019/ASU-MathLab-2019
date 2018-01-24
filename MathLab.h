@@ -85,4 +85,5 @@ public:
     CMatrix element_mul(CMatrix& another_matrix);
     CMatrix mpower(double);//elements power
     CMatrix power(int);//matrix power
+    CMatrix operator^(int);//matrix power operator
 };
