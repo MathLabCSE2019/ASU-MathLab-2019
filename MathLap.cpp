@@ -435,13 +435,31 @@ void CMatrix:: div(CMatrix& m)
     this->mul(m);
 
 }
-///////////element element power////////////
+
+    //element element power//
 CMatrix CMatrix::mpower(double x)
 {
     CMatrix result_matrix(nR,nC);
     for(int i=0;i<nR;i++)
      for(int j=0;j<nC;j++)
         result_matrix.values[i][j]=pow(values[i][j],x);
+     return result_matrix;
+}
+
+       //matrix power//
+
+CMatrix CMatrix::power(int x)
+
+{
+    CMatrix result_matrix(nR , nC);
+    for(int i=0;i<nR;i++)
+     for(int j=0;j<nC;j++)
+        result_matrix.values[i][j]=values[i][j];
+    while(x>1)
+    {
+        result_matrix*=(*this);
+        x--;
+    }
      return result_matrix;
 }
 

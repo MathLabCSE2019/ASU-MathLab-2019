@@ -83,5 +83,6 @@ public:
     void div(CMatrix& m);
     CMatrix element_div(double a);
     CMatrix element_mul(CMatrix& another_matrix);
-    CMatrix mpower(double);
+    CMatrix mpower(double);//elements power
+    CMatrix power(int);//matrix power
 };
