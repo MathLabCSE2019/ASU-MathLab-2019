@@ -62,6 +62,7 @@ public:
     //Post Increment, int is not used
     CMatrix operator-();
     CMatrix operator+();
+    CMatrix operator^(int);//matrix power operator
     friend istream& operator >> (istream &is, CMatrix& C);
     //Stream
     friend ostream& operator << (ostream &os, CMatrix& C);
@@ -85,5 +86,4 @@ public:
     CMatrix element_mul(CMatrix& another_matrix);
     CMatrix mpower(double);//elements power
     CMatrix power(int);//matrix power
-    CMatrix operator^(int);//matrix power operator
 };

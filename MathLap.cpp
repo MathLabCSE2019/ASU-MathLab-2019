@@ -468,6 +468,6 @@ CMatrix CMatrix::operator^(int x)
 {
     CMatrix f;
   f=(*this).power(x);
-    return f ;
+   return f;
 }
 
