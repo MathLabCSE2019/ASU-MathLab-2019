@@ -1,5 +1,5 @@
-#include <iostream>
 #include "MathLab.h"
+#include "MathLap.cpp"
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -51,6 +51,9 @@ if(char_exist(x,"+")){
 }
 else if(char_exist(x,"-")){
     y +="-";
+}
+else if(char_exist(x,"^")){
+    y +="^";
 }
 else if(char_exist(x,"./")){
     y +="./";
@@ -119,7 +122,7 @@ string aVarChar (string x, bool bfOp){ //to find vars to do operations on bfOp t
 
 
 int char_pos(string x,char c){
-int pos = NULL;
+int pos;
 for(int i=0;i<x.length();i++){
     if(x[i]==c){
         pos =i;
@@ -224,6 +227,10 @@ void opCalc(CMatrix a, double b, CMatrix& c,string o){
         c = a;
         cout<<endl<<c<<endl;
        }
+        else if(o== "^"){
+        c = a^(int)b;
+        cout<<endl<<c<<endl;
+       }
 }
 
 bool numExist(string x){
@@ -242,7 +249,7 @@ CMatrix varValues[1000];
 int i = 0 ;
 string input = "";
 //----file-------------------------
-ifstream testFile("example(1).m");
+ifstream testFile("example.m");
       if(testFile.is_open()){
 
             while( !testFile.eof() ){
