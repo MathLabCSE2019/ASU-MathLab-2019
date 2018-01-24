@@ -535,3 +535,33 @@ void CMatrix:: div(CMatrix& m)
 	}
 
 }
+void CMatrix::fix(int &a,int &b,int &s)
+{
+	/*Simply swaps the first non zero row it finds incase element we are trying to use as pivot is 0 */
+	while(values[a][b]==0 && a<nR && b<nC)
+	{
+		for(int i=a;i<nR;i++)
+		{
+			if(values[i][b]!=0)
+			{
+				this->swap(a,i);
+				s=-s;
+				return;
+			}
+		}
+		b++;
+	}
+}
+
+void CMatrix::swap(int a,int b)
+{
+	/*swaps row a and row b*/
+	double temp=0;
+	for(int j=0;j<nC;j++)
+	{
+
+		temp=values[a][j];
+		values[a][j]=values[b][j];
+		values[b][j]=temp;
+	}
+}
