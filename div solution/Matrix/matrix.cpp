@@ -507,4 +507,31 @@ void CMatrix:: div(CMatrix& m)
 
 }
 
+	void CMatrix::sweep(int a,int b)
+{
 
+	if (values[a][b] == 0)	//Checking whether the element is a valid pivot
+		return;
+	 
+	/*double divisor=values[a][b];//saving pivot values to a different variable as it it gets altered
+	for(int j=0;j<nC;j++)
+	{
+		values[a][j]/=divisor;//making pivot 1
+	}*/
+
+	double factor=0.0;//number to multiply pivot with and subtract from corresponding rows
+	for(int i=a+1;i<nR;i++)
+	{
+		if(i!=a)
+		{
+			factor=values[i][b]/values[a][b];//number to multiply pivot with and subtract from corresponding rows to sweep
+			for(int j=0;j<nR;j++)
+			{
+				values[i][j]-=factor*values[a][j];//actual subtraction of each element of row i
+			    if(abs(values[i][j]) < Co)
+			    	values[i][j]=0.0;
+			}
+		}
+	}
+
+}
