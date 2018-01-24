@@ -83,7 +83,7 @@ public:
 	void div(CMatrix& m);
 	CMatrix element_div(double a);
 	CMatrix element_mul(CMatrix& another_matrix);
-
+    void sweep(int a,int b);
 
 
 };
