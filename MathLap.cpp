@@ -455,13 +455,30 @@ CMatrix CMatrix::power(int x)
     for(int i=0;i<nR;i++)
      for(int j=0;j<nC;j++)
         result_matrix.values[i][j]=values[i][j];
-    while(x>1)
+
+    if(x<0){
+        result_matrix.getInverse(result_matrix);
+        while(x>1)
     {
-        result_matrix*=(*this);
+        result_matrix*=*this;
+        x--;
+    }
+     return result_matrix;
+    }
+    else if(x==0){
+        CMatrix m(1,1,1);
+        return m;
+    }
+    else if(x>0)
+{
+    while(x>1)
+    {result_matrix*=(*this);
         x--;
     }
      return result_matrix;
 }
+}
+
 
 ///////matrix power operator///////////////
 CMatrix CMatrix::operator^(int x)
