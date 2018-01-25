@@ -450,7 +450,7 @@ CMatrix CMatrix::mpower(double x)
 
 CMatrix CMatrix::power(int x)
 
-{
+{   if(nR!=nC)throw 1;
     CMatrix result_matrix(nR , nC);
     for(int i=0;i<nR;i++)
      for(int j=0;j<nC;j++)
@@ -482,9 +482,15 @@ CMatrix CMatrix::power(int x)
 
 ///////matrix power operator///////////////
 CMatrix CMatrix::operator^(int x)
-{
+{try{
     CMatrix f;
   f=(*this).power(x);
    return f;
+   }
+     catch(int i)
+  {
+      cout<<"Error:To get power of matrix,the matrix should have square dimensions";
+  }
+
 }
 

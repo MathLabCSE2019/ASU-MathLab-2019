@@ -228,7 +228,6 @@ void opCalc(CMatrix a, double b, CMatrix& c,string o){
         cout<<endl<<c<<endl;
        }
         else if(o== "^"){
-        b=-2;
         c = a^(int)b;
         cout<<endl<<c<<endl;
        }
