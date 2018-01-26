@@ -84,4 +84,17 @@ public:
     CMatrix element_div(double a);
     CMatrix element_mul(CMatrix& another_matrix);
     void squareRoot(CMatrix& matrix);
+    void sqrtm(CMatrix& matrix);
+    void Cotd(CMatrix& matrix);
+	void Tand(CMatrix& matrix);
+	void Secd(CMatrix& matrix);
+	void Cosd(CMatrix& matrix);
+	void Cscd(CMatrix& matrix);
+	void Sind(CMatrix& matrix);
+	void Cot(CMatrix& matrix);
+	void Tan(CMatrix& matrix);
+	void Sec(CMatrix& matrix);
+	void Cos(CMatrix& matrix);
+	void Csc(CMatrix& matrix);
+	void Sin(CMatrix& matrix);
 };
