@@ -448,5 +448,111 @@ void CMatrix::squareRoot(CMatrix& matrix)
     }
 
 }
+//----------------------------------------SquareRootForAllMatrix---------------------------------------
+void CMatrix:: sqrtm(CMatrix& matrix)
+{
+
+    //----------------------Calculate the race and Determinant----------------------------
+    double Trace = values[0][0]+values[1][1];
+    double Determinant = values[0][0]*values[1][1]-values[0][1]*values[1][0];
+    //----------------------Calculate EigenValues-----------------------------------------
+    double eigenValue1;
+    double eigenValue2;
+
+    eigenValue1 = (Trace/2)+sqrt((pow(Trace,2)/4)-Determinant);
+    eigenValue2 = (Trace/2)-sqrt((pow(Trace,2)/4)-Determinant);
+    //----------------------Calculate firstEigenVector------------------------------------
+    double **eigenVector1 = new double*[nR];
+    for(int i=0;i<nR;i++)
+    {
+        eigenVector1[i] = new double[1];
+    }
+    eigenVector1[0][0] = eigenValue1-values[1][1];
+    eigenVector1[1][0] = values[1][0];
+    //----------------------secondEigenVector---------------------------------------------
+     double **eigenVector2 = new double*[nR];
+    for(int i=0;i<nR;i++)
+    {
+        eigenVector2[i] = new double[1];
+    }
+    eigenVector2[0][0] = eigenValue2-values[1][1];
+    eigenVector2[1][0] = values[1][0];
+    //----------------------------------eigenVectorMatrix----------------------------------
+      double **eigenVectorMatrix = new double*[nR];
+    for(int i=0;i<nR;i++)
+    {
+        eigenVectorMatrix[i] = new double[nC];
+    }
+    eigenVectorMatrix[0][0] = eigenVector1[0][0];
+    eigenVectorMatrix[1][0] = eigenVector1[1][0];
+    eigenVectorMatrix[0][1] = eigenVector2[0][0];
+    eigenVectorMatrix[1][1] = eigenVector2[1][0];
+    //----------------------------------eigenValuesMatrix---------------------------------------------
+      double **eigenValuesMatrix = new double*[nR];
+    for(int i=0;i<nR;i++)
+    {
+         eigenValuesMatrix[i] = new double[nC];
+    }
+        eigenValuesMatrix[0][0] = sqrt(eigenValue1);
+        eigenValuesMatrix[1][1] = sqrt(eigenValue2);
+        eigenValuesMatrix[0][1] = 0;
+        eigenValuesMatrix[1][0] = 0;
+    //----------------------------------eigenVectorsInverseMatrix---------------------------------------------
+      double **eigenVectorsInverseMatrix = new double*[nR];
+    for(int i=0;i<nR;i++)
+    {
+        eigenVectorsInverseMatrix[i] = new double[nC];
+    }
+    double DeterminantForInverse = eigenVectorMatrix[0][0]*eigenVectorMatrix[1][1]-eigenVectorMatrix[0][1]*eigenVectorMatrix[1][0];
+    double DInverse = 1/DeterminantForInverse;
+    eigenVectorsInverseMatrix[0][0] = DInverse*eigenVectorMatrix[1][1];
+    eigenVectorsInverseMatrix[1][0] = DInverse*(-1)*eigenVectorMatrix[1][0];
+    eigenVectorsInverseMatrix[0][1] = DInverse*(-1)*eigenVectorMatrix[0][1];
+    eigenVectorsInverseMatrix[1][1] = DInverse*eigenVectorMatrix[0][0];
+    //----------------------------------Result-----------------------------------------
+     double **Result1 = new double*[nR];
+    for(int i=0;i<nR;i++)
+    {
+        Result1[i] = new double[nC];
+         for (int j = 0; j < nC; j++)
+        {
+            Result1[i][j] = 0;
+        }
+    }
+     for (int i = 0; i < nR; i++)
+    {
+        for (int j = 0; j < nC; j++)
+        {
+
+            for (int k = 0; k < nR; k++)
+            {
+               Result1[i][j] += eigenVectorMatrix[i][k] * eigenValuesMatrix[k][j];
+            }
+        }
+
+    }
+     double **Result = new double*[nR];
+    for(int i=0;i<nR;i++)
+    {
+        Result[i] = new double[nC];
+           for (int j = 0; j < nC; j++)
+        {
+            Result[i][j] = 0;
+        }
+    }
+     for (int i = 0; i < nR; i++)
+    {
+        for (int j = 0; j < nC; j++)
+        {
+
+            for (int k = 0; k < nR; k++)
+            {
+                Result[i][j] += Result1[i][k] * eigenVectorsInverseMatrix[k][j];
+                values[i][j] = Result[i][j];
+            }
+        }
+
+    }
 
 }
+
