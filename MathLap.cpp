@@ -435,3 +435,18 @@ void CMatrix:: div(CMatrix& m)
     this->mul(m);
 
 }
+//-----------------------------------------SquareRootElementByElement---------------------------
+void CMatrix::squareRoot(CMatrix& matrix)
+{
+
+    for(int i=0;i<nR;i++)
+    {
+        for(int j=0;j<nC;j++)
+        {
+            values[i][j] = sqrt(matrix.values[i][j]);
+        }
+    }
+
+}
+
+}
