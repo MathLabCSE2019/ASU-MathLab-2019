@@ -511,8 +511,8 @@ CMatrix CMatrix::operator^(int x)
                 }
                 catch(int z)
                 {
-                    cout<<"error"<<endl;
-                    //log10(values[i][j])==error;
+                    cout<<"Error: There is no log value for negative numbers"<<endl;
+
                 }
             output_matrix.values[i][j]=log10(values[i][j]);
             }
