@@ -614,7 +614,8 @@ void CMatrix::Sec(CMatrix& matrix)
         
     }
 
-}//---------------------------------CotFunction----------------------------------------
+}
+    //---------------------------------CotFunction----------------------------------------
 void CMatrix::Csc(CMatrix& matrix)
 {
     for(int i=0 ; i<nR ; i++)
@@ -626,4 +627,83 @@ void CMatrix::Csc(CMatrix& matrix)
     }
 
 }
+ //-----------------------------------------------SindFunction------------------------------------
+void CMatrix::Sind(CMatrix& matrix)
+{
+    float pi = 3.141592654;
+    for(int i=0 ; i<nR ; i++)
+    {
+        for(int j=0 ; j<nC ; j++)
+        {
+           values[i][j] = sin((pi/180)*matrix.values[i][j]);
+        }
+    }
+
+}
+//-----------------------------------------------CscdFunction----------------------------------------------------
+void CMatrix::Cscd(CMatrix& matrix)
+{
+    float pi = 3.141592654;
+    for(int i=0 ; i<nR ; i++)
+    {
+        for(int j=0 ; j<nC ; j++)
+        {
+            values[i][j] = 1/sin((pi/180)*matrix.values[i][j]);
+        }
+    }
+
+}
+//-----------------------------------------------CosdFunction---------------------------------
+void CMatrix::Cosd(CMatrix& matrix)
+{
+    float pi = 3.141592654;
+    for(int i=0 ; i<nR ; i++)
+    {
+        for(int j=0 ; j<nC ; j++)
+        {
+            values[i][j] = cos((pi/180)*matrix.values[i][j]);
+        }
+    }
+
+}
+//-----------------------------------------------SecdFunction---------------------------------------------------
+void CMatrix::Secd(CMatrix& matrix)
+{
+    float pi = 3.141592654;
+    for(int i=0 ; i<nR ; i++)
+    {
+        for(int j=0 ; j<nC ; j++)
+        {
+            values[i][j] = 1/cos((pi/180)*matrix.values[i][j]);
+        }
+    }
+
+}
+//-----------------------------------------------TandFunction----------------------------------------------------
+void CMatrix::Tand(CMatrix& matrix)
+{
+    float pi = 3.141592654;
+    for(int i=0 ; i<nR ; i++)
+    {
+        for(int j=0 ; j<nC ; j++)
+        {
+            values[i][j] = tan((pi/180)*values[i][j]);
+        }
+    }
+
+}
+//-----------------------------------------------CotdFunction----------------------------------------------------
+void CMatrix::Cotd(CMatrix& matrix)
+{
+    float pi = 3.141592654;
+    for(int i=0 ; i<nR ; i++)
+    {
+        for(int j=0 ; j<nC ; j++)
+        {
+            values[i][j] = 1/tan((pi/180)*matrix.values[i][j]);
+        }
+    }
+
+}
+
 
