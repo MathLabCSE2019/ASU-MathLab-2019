@@ -555,4 +555,40 @@ void CMatrix:: sqrtm(CMatrix& matrix)
     }
 
 }
+//-----------------------------------SinFunction---------------------------------------
+void CMatrix::Sin(CMatrix& matrix)
+{
+    for(int i=0 ; i<nR ; i++)
+    {
+        for(int j=0 ; j<nC ; j++)
+        {
+            values[i][j] = sin(matrix.values[i][j]);
+        }
+    }
+
+}
+//-----------------------------------CosFunction---------------------------------------
+void CMatrix::Cos(CMatrix& matrix)
+{
+    for(int i=0 ; i<nR ; i++)
+    {
+        for(int j=0 ; j<nC ; j++)
+        {
+            values[i][j] = Cos(matrix.values[i][j]);
+        }
+    }
+
+}
+//-----------------------------------TanFunction---------------------------------------
+void CMatrix::Tan(CMatrix& matrix)
+{
+    for(int i=0 ; i<nR ; i++)
+    {
+        for(int j=0 ; j<nC ; j++)
+        {
+            values[i][j] = Tan(matrix.values[i][j]);
+        }
+    }
+
+}
 
