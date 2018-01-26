@@ -503,6 +503,17 @@ CMatrix CMatrix::operator^(int x)
         for(int i=0;i<nR;i++)
           for(int j=0;j<nC;j++)
             {
+                try
+                {
+                  if(values[i][j]<1)
+                    throw 1;
+                  mlog10();
+                }
+                catch(int z)
+                {
+                    cout<<"error"<<endl;
+                    //log10(values[i][j])==error;
+                }
             output_matrix.values[i][j]=log10(values[i][j]);
             }
 
