@@ -496,4 +496,5 @@ CMatrix CMatrix::operator^(int x)
   }
 
 }
+ppppppppppp
 
