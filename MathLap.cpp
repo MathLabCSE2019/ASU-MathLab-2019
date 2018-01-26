@@ -591,4 +591,39 @@ void CMatrix::Tan(CMatrix& matrix)
     }
 
 }
+//---------------------------------CscFunction----------------------------------------
+void CMatrix::Csc(CMatrix& matrix)
+{
+    for(int i=0 ; i<nR ; i++)
+    {
+        for(int j=0 ; j<nC ; j++)
+        {
+           values[i][j] = 1/sin(matrix.values[i][j]);
+        
+    }
+
+}
+    //---------------------------------SecFunction----------------------------------------
+void CMatrix::Sec(CMatrix& matrix)
+{
+    for(int i=0 ; i<nR ; i++)
+    {
+        for(int j=0 ; j<nC ; j++)
+        {
+           values[i][j] = 1/cos(matrix.values[i][j]);
+        
+    }
+
+}//---------------------------------CotFunction----------------------------------------
+void CMatrix::Csc(CMatrix& matrix)
+{
+    for(int i=0 ; i<nR ; i++)
+    {
+        for(int j=0 ; j<nC ; j++)
+        {
+           values[i][j] = 1/tan(matrix.values[i][j]);
+        }
+    }
+
+}
 
