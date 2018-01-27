@@ -497,27 +497,40 @@ CMatrix CMatrix::operator^(int x)
 
 }
 //matrix logarithm
+//log10
  CMatrix CMatrix::mlog10() //log function(log to the base 10)
 {
     CMatrix output_matrix(nR , nC);
         for(int i=0;i<nR;i++)
           for(int j=0;j<nC;j++)
-            {
+            { /*
                 try
                 {
-                  if(values[i][j]<1)
-                    throw 1;
-                  mlog10();
+
                 }
                 catch(int z)
                 {
                     cout<<"Error: There is no log value for negative numbers"<<endl;
 
-                }
-            output_matrix.values[i][j]=log10(values[i][j]);
+                }*/
+              output_matrix.values[i][j]=log10(values[i][j]);
             }
 
      return output_matrix;
 }
+//log2
+CMatrix CMatrix::mlog2() //log function(log to the base 2)
+{
+    CMatrix result_matrix(nR , nC);
+        for(int i=0;i<nR;i++)
+          for(int j=0;j<nC;j++)
+            {
+            result_matrix.values[i][j]=log2(values[i][j]);
+            }
+
+     return result_matrix;
+}
+
+
 
 
