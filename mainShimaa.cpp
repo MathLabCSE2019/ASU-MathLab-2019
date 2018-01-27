@@ -46,7 +46,14 @@ if(in.is_open()){
    else{nV--;} //for empty
 nV++;
 }}
+}else{ // var exist
+   if(input[0]!="" && input[0] != "\n"){ // print var line
+    int pos = pos_search(vars,tvar);
+    cout<<"var exist at pos "<<pos<<endl;
+   }
+}
 }}
+}
 else{cout<<"File Does Not Open"<<endl;}
 return 0;
 }
