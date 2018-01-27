@@ -11,6 +11,9 @@ if(in.is_open()){
     while( !in.eof() ){
     getline(in,input[0]);
     cout<<input[0]<<endl;
+    input[0] = cleanString(input[0]);
+    cout<<input[0]<<endl;
+    string tvar = varChar(input[0]);
 }}
 else{cout<<"File Does Not Open"<<endl;}
 return 0;
