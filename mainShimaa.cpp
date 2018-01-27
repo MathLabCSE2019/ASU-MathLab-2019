@@ -35,7 +35,9 @@ if(in.is_open()){
    //cout<<"operation!"<<endl;
     vector <string> varsInOperation;
    int n = 0;
-charsExistInString(input[0],varsInOperation,n); // know all matrix variables in the operation        
+charsExistInString(input[0],varsInOperation,n); // know all matrix variables in the operation  
+   if(n == 0 && operationExist(input[0])){ // return 1*1 matrix
+   }
    else if (n==0){ // return MI Matrix
 
 } else { // return R*C Matrix
