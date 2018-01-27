@@ -86,6 +86,6 @@ public:
     CMatrix element_mul(CMatrix& another_matrix);
     CMatrix mpower(double);//elements power
     CMatrix power(int);//matrix power
-    cMatrix mlog10(); //matrix log to the base 10
-    cMatrix mlog2(); //matrix log to the base 2
+    CMatrix mlog10(); //matrix log to the base 10
+    CMatrix mlog2(); //matrix log to the base 2
 };
