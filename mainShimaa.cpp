@@ -14,6 +14,12 @@ if(in.is_open()){
     input[0] = cleanString(input[0]);
     cout<<input[0]<<endl;
     string tvar = varChar(input[0]);
+       if(!exist(vars,tvar)){ //var not exist
+        if(char_exist(input[0],"=")){ //for multi-line
+                vars.push_back(tvar);
+                cout<<"**"<<tvar<<endl;}
+    int inputBegNum = countChar(input[0],'[');
+    int inputEndNum = countChar(input[0],']');}}
 }}
 else{cout<<"File Does Not Open"<<endl;}
 return 0;
