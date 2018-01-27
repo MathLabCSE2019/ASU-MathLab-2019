@@ -33,10 +33,12 @@ if(in.is_open()){
         nLine = 1;nV--;}}
        else if(char_exist(input[0],"=")){ // this is operation
    //cout<<"operation!"<<endl;
-       }
+           
    else if (n==0){ // return MI Matrix
 
-}
+} else { // return R*C Matrix
+
+}}
 }}
 else{cout<<"File Does Not Open"<<endl;}
 return 0;
