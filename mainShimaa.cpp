@@ -31,6 +31,9 @@ if(in.is_open()){
        else{
        cout<<"this is the full line"<<endl<<input[1]<<endl<<input[0]<<endl;
         nLine = 1;nV--;}}
+       else if(char_exist(input[0],"=")){ // this is operation
+   //cout<<"operation!"<<endl;
+       }
 }}
 else{cout<<"File Does Not Open"<<endl;}
 return 0;
