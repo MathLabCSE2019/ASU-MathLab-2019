@@ -515,7 +515,7 @@ CMatrix CMatrix::operator^(int x)
                 }
                 catch(int z)
                 {
-                    cout<<"Error: There is no log value for negative numbers"<<endl;
+                    cout<<"Error: There is no log10 value for negative numbers"<<endl;
 
                 }
               output_matrix.values[i][j]=log10(values[i][j]);
@@ -530,9 +530,20 @@ CMatrix CMatrix::mlog2() //log function(log to the base 2)
         for(int i=0;i<nR;i++)
           for(int j=0;j<nC;j++)
             {
-            result_matrix.values[i][j]=log2(values[i][j]);
-            }
+           if( values[i][j]<1);
+                throw 1;
+                try
+                {
+             result_matrix.values[i][j]=log2(values[i][j]);
+             return result_matrix ;
+                }
+                catch(int u)
+                {
+                    cout<<"Error: There is no log2 value for negative numbers"<<endl;
 
+                }
+              result_matrix.values[i][j]=log10(values[i][j]);
+            }
      return result_matrix;
 }
 //natural log
@@ -541,9 +552,21 @@ CMatrix CMatrix::mlog() //ln function
     CMatrix the_result_matrix(nR , nC);
         for(int i=0;i<nR;i++)
           for(int j=0;j<nC;j++)
-            {
-            the_result_matrix.values[i][j]=ln(values[i][j]);
-            }
+          {
+            if( values[i][j]<1);
+                throw 1;
+                try
+                {
+             the_result_matrix.values[i][j]=log(values[i][j]);
+             return the_result_matrix ;
+                }
+                catch(int w)
+                {
+                    cout<<"Error: There is no log value for negative numbers"<<endl;
+
+                }
+            the_result_matrix.values[i][j]=log10(values[i][j]);
+          }
      return the_result_matrix;
 }
 
