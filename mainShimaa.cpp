@@ -33,7 +33,9 @@ if(in.is_open()){
         nLine = 1;nV--;}}
        else if(char_exist(input[0],"=")){ // this is operation
    //cout<<"operation!"<<endl;
-           
+    vector <string> varsInOperation;
+   int n = 0;
+charsExistInString(input[0],varsInOperation,n); // know all matrix variables in the operation        
    else if (n==0){ // return MI Matrix
 
 } else { // return R*C Matrix
