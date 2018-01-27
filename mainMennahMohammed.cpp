@@ -10,3 +10,20 @@ string varChar (string x){ //find var before '=' sign
         if(!char_exist(x,"="))return x.substr(0,1);
         return varTemp;
 }
+bool char_exist(string x, string y){ //Will need to know if certain char exist in string
+bool exist = false;
+int siz = x.size();
+int i =0;
+for(i=0;i<siz;i++){
+    if(x.substr(i,1)=="."){
+        if(x.substr(i,2)==y){
+            exist =true;
+            i++;
+        }
+     }
+    else if(x.substr(i,1)==y){
+        exist = true;
+    }
+}
+return exist;
+}
