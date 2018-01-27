@@ -448,75 +448,179 @@ void CMatrix::squareRoot(CMatrix& matrix)
     }
 
 }
-//----------------------------------------SquareRootForAllMatrix---------------------------------------
+//=======================================================================================================
 void CMatrix:: sqrtm(CMatrix& matrix)
 {
-
+     struct matrix
+    {
+    double real;
+    double imag;
+    };
     //----------------------Calculate the race and Determinant----------------------------
     double Trace = values[0][0]+values[1][1];
     double Determinant = values[0][0]*values[1][1]-values[0][1]*values[1][0];
+    cout<<"Trace =>"<<Trace<<endl;
+    cout<<"Determinant =>"<<Determinant<<endl;
     //----------------------Calculate EigenValues-----------------------------------------
-    double eigenValue1;
-    double eigenValue2;
-
-    eigenValue1 = (Trace/2)+sqrt((pow(Trace,2)/4)-Determinant);
-    eigenValue2 = (Trace/2)-sqrt((pow(Trace,2)/4)-Determinant);
+    matrix eigenValue1;
+    matrix eigenValue2;
+    double square = (pow(Trace,2)/4)-Determinant;
+    if(square > 0)
+    {
+    eigenValue1.real = (Trace/2)+sqrt(square);
+    eigenValue2.real = (Trace/2)-sqrt(square);
+    eigenValue1.imag = 0;
+    eigenValue2.imag = 0;
+    }
+    else if(square < 0)
+    {
+    square *= -1;
+    eigenValue1.imag = (Trace/2)+sqrt(square);
+    eigenValue2.imag = (Trace/2)-sqrt(square);
+    eigenValue1.real = 0;
+    eigenValue2.real = 0;
+    }
+    cout<<"eigenValue1 =>"<<eigenValue1.real<<'+'<<eigenValue1.imag<<'i'<<endl;
+    cout<<"eigenValue2 =>"<<eigenValue2.real<<'+'<<eigenValue2.imag<<'i'<<endl;
     //----------------------Calculate firstEigenVector------------------------------------
-    double **eigenVector1 = new double*[nR];
+    matrix **eigenVector1 = new matrix*[nR];
     for(int i=0;i<nR;i++)
     {
-        eigenVector1[i] = new double[1];
+        eigenVector1[i] = new matrix[1];
+        for(int j=0;j<1;j++)
+        {
+            eigenVector1[i][j].real = 0;
+            eigenVector1[i][j].imag = 0;
+        }
     }
-    eigenVector1[0][0] = eigenValue1-values[1][1];
-    eigenVector1[1][0] = values[1][0];
+    eigenVector1[0][0].real = eigenValue1.real-values[1][1];
+    eigenVector1[0][0].imag = eigenValue1.imag;
+    eigenVector1[1][0].real = values[1][0];
+    cout<<"eigenVector1[0][0] =>"<<eigenVector1[0][0].real<<'+'<<eigenVector1[0][0].imag<<'i'<<endl;
+    cout<<"eigenVector1[1][0] =>"<<eigenVector1[1][0].real<<'+'<<eigenVector1[1][0].imag<<'i'<<endl;
     //----------------------secondEigenVector---------------------------------------------
-     double **eigenVector2 = new double*[nR];
+     matrix **eigenVector2 = new matrix*[nR];
     for(int i=0;i<nR;i++)
     {
-        eigenVector2[i] = new double[1];
+        eigenVector2[i] = new matrix[1];
+        for(int j=0;j<1;j++)
+        {
+            eigenVector2[i][j].real = 0;
+            eigenVector2[i][j].imag = 0;
+        }
     }
-    eigenVector2[0][0] = eigenValue2-values[1][1];
-    eigenVector2[1][0] = values[1][0];
+    eigenVector2[0][0].real = eigenValue2.real-values[1][1];
+    eigenVector2[0][0].imag = eigenValue2.imag;
+    eigenVector2[1][0].real = values[1][0];
+    cout<<"eigenVector2[0][0] =>"<<eigenVector2[0][0].real<<'+'<<eigenVector2[0][0].imag<<'i'<<endl;
+    cout<<"eigenVector2[1][0] =>"<<eigenVector2[1][0].real<<'+'<<eigenVector2[1][0].imag<<'i'<<endl;
     //----------------------------------eigenVectorMatrix----------------------------------
-      double **eigenVectorMatrix = new double*[nR];
+      matrix **eigenVectorMatrix = new matrix*[nR];
     for(int i=0;i<nR;i++)
     {
-        eigenVectorMatrix[i] = new double[nC];
+        eigenVectorMatrix[i] = new matrix[nC];
+         for(int j=0;j<nC;j++)
+        {
+            eigenVectorMatrix[i][j].real = 0;
+            eigenVectorMatrix[i][j].imag = 0;
+        }
     }
-    eigenVectorMatrix[0][0] = eigenVector1[0][0];
-    eigenVectorMatrix[1][0] = eigenVector1[1][0];
-    eigenVectorMatrix[0][1] = eigenVector2[0][0];
-    eigenVectorMatrix[1][1] = eigenVector2[1][0];
+    eigenVectorMatrix[0][0].real = eigenVector1[0][0].real;
+    eigenVectorMatrix[0][0].imag = eigenVector1[0][0].imag;
+    eigenVectorMatrix[1][0].real = eigenVector1[1][0].real;
+    eigenVectorMatrix[1][0].imag = eigenVector1[1][0].imag;
+    eigenVectorMatrix[0][1].real = eigenVector2[0][0].real;
+    eigenVectorMatrix[0][1].imag = eigenVector2[0][0].imag;
+    eigenVectorMatrix[1][1].real = eigenVector2[1][0].real;
+    eigenVectorMatrix[1][1].imag = eigenVector2[1][0].imag;
+     cout<<" eigenVectorMatrix =>"<<endl;
+    for(int i=0;i<2;i++)
+    {
+        for(int j=0;j<2;j++)
+        {
+            cout<<eigenVectorMatrix[i][j].real<<'+'<< eigenVectorMatrix[i][j].imag<<'i'<<"\t";
+        }
+        cout<<'\n';
+    }
     //----------------------------------eigenValuesMatrix---------------------------------------------
-      double **eigenValuesMatrix = new double*[nR];
+      matrix **eigenValuesMatrix = new matrix*[nR];
     for(int i=0;i<nR;i++)
     {
-         eigenValuesMatrix[i] = new double[nC];
+         eigenValuesMatrix[i] = new matrix[nC];
+         for(int j=0;j<nC;j++)
+         {
+            eigenValuesMatrix[i][j].real = 0;
+            eigenValuesMatrix[i][j].imag = 0;
+         }
     }
-        eigenValuesMatrix[0][0] = sqrt(eigenValue1);
-        eigenValuesMatrix[1][1] = sqrt(eigenValue2);
-        eigenValuesMatrix[0][1] = 0;
-        eigenValuesMatrix[1][0] = 0;
+    if(eigenValue1.real<0 && eigenValue2.real>0)
+    {
+        eigenValue1.real *= -1;
+        eigenValuesMatrix[0][0].imag = sqrt(eigenValue1.real);
+        eigenValuesMatrix[1][1].real = sqrt(eigenValue2.real);
+    }
+    else if(eigenValue2.real<0 && eigenValue1.real>0 )
+    {
+        eigenValue2.real *= -1;
+        eigenValuesMatrix[1][1].imag = sqrt(eigenValue2.real);
+        eigenValuesMatrix[0][0].real = sqrt(eigenValue1.real);
+    }
+    else if(eigenValue2.real<0 && eigenValue1.real<0)
+    {
+        eigenValue1.real *= -1;
+        eigenValue2.real *= -1;
+        eigenValuesMatrix[0][0].imag = sqrt(eigenValue1.real);
+        eigenValuesMatrix[1][1].imag = sqrt(eigenValue2.real);
+    }
+    else
+    {
+        eigenValuesMatrix[0][0].real = sqrt(eigenValue1.real);
+        eigenValuesMatrix[1][1].real = sqrt(eigenValue2.real);
+    }
+    cout<<"eigenValuesMatrix =>"<<endl;
+    for(int i=0;i<2;i++)
+    {
+        for(int j=0;j<2;j++)
+        {
+            cout<<eigenValuesMatrix[i][j].real<<'+'<<eigenValuesMatrix[i][j].imag<<'i'<<"\t";
+        }
+        cout<<'\n';
+    }
     //----------------------------------eigenVectorsInverseMatrix---------------------------------------------
-      double **eigenVectorsInverseMatrix = new double*[nR];
+      matrix **eigenVectorsInverseMatrix = new matrix*[nR];
     for(int i=0;i<nR;i++)
     {
-        eigenVectorsInverseMatrix[i] = new double[nC];
+        eigenVectorsInverseMatrix[i] = new matrix[nC];
+        for(int j=0;j<nC;j++)
+        {
+            eigenVectorsInverseMatrix[i][j].real = 0;
+            eigenVectorsInverseMatrix[i][j].imag = 0;
+        }
     }
-    double DeterminantForInverse = eigenVectorMatrix[0][0]*eigenVectorMatrix[1][1]-eigenVectorMatrix[0][1]*eigenVectorMatrix[1][0];
+    double DeterminantForInverse = eigenVectorMatrix[0][0].real*eigenVectorMatrix[1][1].real-eigenVectorMatrix[0][1].real*eigenVectorMatrix[1][0].real;
     double DInverse = 1/DeterminantForInverse;
-    eigenVectorsInverseMatrix[0][0] = DInverse*eigenVectorMatrix[1][1];
-    eigenVectorsInverseMatrix[1][0] = DInverse*(-1)*eigenVectorMatrix[1][0];
-    eigenVectorsInverseMatrix[0][1] = DInverse*(-1)*eigenVectorMatrix[0][1];
-    eigenVectorsInverseMatrix[1][1] = DInverse*eigenVectorMatrix[0][0];
+    eigenVectorsInverseMatrix[0][0].real = DInverse*eigenVectorMatrix[1][1].real;
+    eigenVectorsInverseMatrix[1][0].real = DInverse*(-1)*eigenVectorMatrix[1][0].real;
+    eigenVectorsInverseMatrix[0][1].real = DInverse*(-1)*eigenVectorMatrix[0][1].real;
+    eigenVectorsInverseMatrix[1][1].real = DInverse*eigenVectorMatrix[0][0].real;
+    cout<<"eigenVectorsInverseMatrix =>"<<endl;
+    for(int i=0;i<2;i++)
+    {
+        for(int j=0;j<2;j++)
+        {
+            cout<<eigenVectorsInverseMatrix[i][j].real<<'+'<<eigenVectorsInverseMatrix[i][j].imag<<'i'<<"\t";
+        }
+        cout<<'\n';
+    }
     //----------------------------------Result-----------------------------------------
-     double **Result1 = new double*[nR];
+     matrix **Result1 = new matrix*[nR];
     for(int i=0;i<nR;i++)
     {
-        Result1[i] = new double[nC];
+        Result1[i] = new matrix[nC];
          for (int j = 0; j < nC; j++)
         {
-            Result1[i][j] = 0;
+            Result1[i][j].real = 0;
+            Result1[i][j].imag = 0;
         }
     }
      for (int i = 0; i < nR; i++)
@@ -526,18 +630,29 @@ void CMatrix:: sqrtm(CMatrix& matrix)
 
             for (int k = 0; k < nR; k++)
             {
-               Result1[i][j] += eigenVectorMatrix[i][k] * eigenValuesMatrix[k][j];
+                Result1[i][j].real += (eigenVectorMatrix[i][k].real * eigenValuesMatrix[k][j].real) + (eigenVectorMatrix[i][k].imag * eigenValuesMatrix[k][j].imag) ;
+                Result1[i][j].imag += (eigenVectorMatrix[i][k].real * eigenValuesMatrix[k][j].imag) + (eigenVectorMatrix[i][k].imag * eigenValuesMatrix[k][j].real) ;
             }
         }
 
     }
-     double **Result = new double*[nR];
+    cout<<"Result1 =>"<<endl;
+    for(int i=0;i<2;i++)
+    {
+        for(int j=0;j<2;j++)
+        {
+            cout<<Result1[i][j].real<<'+'<<Result1[i][j].imag<<'i'<<"\t";
+        }
+        cout<<'\n';
+    }
+     matrix **Result = new matrix*[nR];
     for(int i=0;i<nR;i++)
     {
-        Result[i] = new double[nC];
+        Result[i] = new matrix[nC];
            for (int j = 0; j < nC; j++)
         {
-            Result[i][j] = 0;
+            Result[i][j].real = 0;
+            Result[i][j].imag = 0;
         }
     }
      for (int i = 0; i < nR; i++)
@@ -547,11 +662,21 @@ void CMatrix:: sqrtm(CMatrix& matrix)
 
             for (int k = 0; k < nR; k++)
             {
-                Result[i][j] += Result1[i][k] * eigenVectorsInverseMatrix[k][j];
-                values[i][j] = Result[i][j];
+                 Result[i][j].real += (Result1[i][k].real * eigenVectorsInverseMatrix[k][j].real) + (Result1[i][k].imag * eigenVectorsInverseMatrix[k][j].imag) ;
+                 Result[i][j].imag += (Result1[i][k].real * eigenVectorsInverseMatrix[k][j].imag) + (Result1[i][k].imag * eigenVectorsInverseMatrix[k][j].real) ;
             }
         }
 
+    }
+    //----------------------------------Printing the Result---------------------------------------------
+      cout<<"SquareRootForTheMatrix =>"<<endl;
+    for(int i=0 ; i<nR ; i++)
+    {
+        for(int j=0 ; j<nC ; j++)
+        {
+            cout<<Result[i][j].real<<'+'<<Result[i][j].imag<<'i'<<"\t";
+        }
+        cout<<"\n";
     }
 
 }
