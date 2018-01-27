@@ -6,6 +6,7 @@
 #include "stdio.h"
 #include <cstring>
 #include <cstdlib>
+#include "math.h"
 
 using namespace std;
 
@@ -486,6 +487,7 @@ CMatrix CMatrix::power(int x)
 CMatrix CMatrix::operator^(int x)
 {try{
     CMatrix f;
+     CMatrix w;
      x=-2;
   f=(*this).power(x);
    return f;
@@ -503,16 +505,19 @@ CMatrix CMatrix::operator^(int x)
     CMatrix output_matrix(nR , nC);
         for(int i=0;i<nR;i++)
           for(int j=0;j<nC;j++)
-            { /*
+            {
+              if( values[i][j]<1);
+                throw 1;
                 try
                 {
-
+             output_matrix.values[i][j]=log10(values[i][j]);
+             return output_matrix;
                 }
                 catch(int z)
                 {
                     cout<<"Error: There is no log value for negative numbers"<<endl;
 
-                }*/
+                }
               output_matrix.values[i][j]=log10(values[i][j]);
             }
 
