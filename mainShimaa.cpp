@@ -19,7 +19,11 @@ if(in.is_open()){
                 vars.push_back(tvar);
                 cout<<"**"<<tvar<<endl;}
     int inputBegNum = countChar(input[0],'[');
-    int inputEndNum = countChar(input[0],']');}}
+    int inputEndNum = countChar(input[0],']');
+     if((inputBegNum>0||inputEndNum>0)&&(inputBegNum == inputEndNum)&&(nLine == 1)){ //check for one line input
+      nLine = 1;
+      cout<<"one line input!"<<endl;
+       }}
 }}
 else{cout<<"File Does Not Open"<<endl;}
 return 0;
