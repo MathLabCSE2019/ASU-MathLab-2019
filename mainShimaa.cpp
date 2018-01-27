@@ -24,6 +24,13 @@ if(in.is_open()){
       nLine = 1;
       cout<<"one line input!"<<endl;
        }}
+     else if(inputBegNum>0||inputEndNum>0){ //check for multi-line input
+      cout<<"multi-line input!"<<endl;
+       if(nLine==1){input[1] = input[0];
+       nLine = 2;}
+       else{
+       cout<<"this is the full line"<<endl<<input[1]<<endl<<input[0]<<endl;
+        nLine = 1;nV--;}}
 }}
 else{cout<<"File Does Not Open"<<endl;}
 return 0;
