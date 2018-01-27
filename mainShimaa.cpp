@@ -37,6 +37,8 @@ if(in.is_open()){
    int n = 0;
 charsExistInString(input[0],varsInOperation,n); // know all matrix variables in the operation  
    if(n == 0 && operationExist(input[0])){ // return 1*1 matrix
+     varValues[nV] = oneToOneOperationCalculation(input[0]);
+//cout << varValues[nV]<<endl;
    }
    else if (n==0){ // return MI Matrix
 
