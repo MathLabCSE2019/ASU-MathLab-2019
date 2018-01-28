@@ -202,7 +202,7 @@ void opCalc(double a, CMatrix b, CMatrix& c,string o){
 
 void opCalc(CMatrix a, double b, CMatrix& c,string o){
        if(o == "+"){
-        c= a + b;
+        c= a+b;
         cout<<endl<<c<<endl;
        }
        else if(o == "-"){

@@ -290,7 +290,6 @@ CMatrix CMatrix:: operator/(CMatrix& another_matrix)
         throw("Invalid Matrix Dimention");
     CMatrix result_matrix(nR , nC);
     result_matrix = *this * (another_matrix.getInverse());
-
     return result_matrix;
 }
 */
@@ -441,9 +440,12 @@ void CMatrix:: div(CMatrix& m)
 CMatrix CMatrix::mpower(double x)
 {
     CMatrix result_matrix(nR,nC);
+
     for(int i=0;i<nR;i++)
-     for(int j=0;j<nC;j++)
+     for(int j=0;j<nC;j++){
+    if((values[i][j]==0)&&(x==0)) throw ("Error:undefined matrix");
         result_matrix.values[i][j]=pow(values[i][j],x);
+        }
      return result_matrix;
 }
 
@@ -469,7 +471,8 @@ CMatrix CMatrix::power(int x)
      return result_matrix;
     }
     else if(x==0){
-        CMatrix m(1,1,1);
+        CMatrix m;
+        m=eye(nR,nC);
         return m;
     }
     else if(x>0)
@@ -486,9 +489,8 @@ CMatrix CMatrix::power(int x)
 ///////matrix power operator///////////////
 CMatrix CMatrix::operator^(int x)
 {try{
-    CMatrix f;
-     CMatrix w;
-     x=-2;
+  CMatrix f;
+    // x=-2;
   f=(*this).power(x);
    return f;
    }
@@ -498,76 +500,18 @@ CMatrix CMatrix::operator^(int x)
   }
 
 }
-//matrix logarithm
-//log10
- CMatrix CMatrix::mlog10() //log function(log to the base 10)
+CMatrix eye(int R , int C)
 {
-    CMatrix output_matrix(nR , nC);
-        for(int i=0;i<nR;i++)
-          for(int j=0;j<nC;j++)
-            {
-              if( values[i][j]<1);
-                throw 1;
-                try
-                {
-             output_matrix.values[i][j]=log10(values[i][j]);
-             return output_matrix;
-                }
-                catch(int z)
-                {
-                    cout<<"Error: There is no log10 value for negative numbers"<<endl;
-
-                }
-              output_matrix.values[i][j]=log10(values[i][j]);
-            }
-
-     return output_matrix;
-}
-//log2
-CMatrix CMatrix::mlog2() //log function(log to the base 2)
-{
-    CMatrix result_matrix(nR , nC);
-        for(int i=0;i<nR;i++)
-          for(int j=0;j<nC;j++)
-            {
-           if( values[i][j]<1);
-                throw 1;
-                try
-                {
-             result_matrix.values[i][j]=log2(values[i][j]);
-             return result_matrix ;
-                }
-                catch(int u)
-                {
-                    cout<<"Error: There is no log2 value for negative numbers"<<endl;
-
-                }
-              result_matrix.values[i][j]=log10(values[i][j]);
-            }
-     return result_matrix;
-}
-//natural log
-CMatrix CMatrix::mlog() //ln function
-{
-    CMatrix the_result_matrix(nR , nC);
-        for(int i=0;i<nR;i++)
-          for(int j=0;j<nC;j++)
-          {
-            if( values[i][j]<1);
-                throw 1;
-                try
-                {
-             the_result_matrix.values[i][j]=log(values[i][j]);
-             return the_result_matrix ;
-                }
-                catch(int w)
-                {
-                    cout<<"Error: There is no log value for negative numbers"<<endl;
-
-                }
-            the_result_matrix.values[i][j]=log10(values[i][j]);
-          }
-     return the_result_matrix;
+    if(C == 0)
+    {
+        CMatrix result_matrix(R , R , MI_EYE);
+        return result_matrix;
+    }
+    else
+    {
+        CMatrix result_matrix(R , C , MI_EYE);
+        return result_matrix;
+    }
 }
 
 
