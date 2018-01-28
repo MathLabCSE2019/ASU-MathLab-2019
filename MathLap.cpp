@@ -674,7 +674,14 @@ void CMatrix:: sqrtm(CMatrix& matrix)
     {
         for(int j=0 ; j<nC ; j++)
         {
+            if(Result[i][j].imag>0)
+            {
             cout<<Result[i][j].real<<'+'<<Result[i][j].imag<<'i'<<"\t";
+            }
+            else if(Result[i][j].imag<0)
+            {
+            cout<<Result[i][j].real<<Result[i][j].imag<<'i'<<"\t";
+            }
         }
         cout<<"\n";
     }
