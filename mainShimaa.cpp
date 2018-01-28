@@ -49,7 +49,7 @@ else { // return R*C Matrix
 
 }
    }
-   else if(input[0]!=""){ // print var line
+   else if(isThereChars(input[0])){ // print var line
    cout<<"Variable Does Not Exist!"<<endl;
    nV--;
    }
