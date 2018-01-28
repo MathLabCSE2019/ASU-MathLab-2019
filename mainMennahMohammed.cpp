@@ -28,3 +28,40 @@ for(i=0;i<siz;i++){
 }
 return exist;
 }
+bool operationExist(string x){
+bool y = false;
+if(char_exist(x,"+")){
+    y = true;
+}
+ if(char_exist(x,"-")){
+   y = true;
+}
+ if(char_exist(x,"./")){
+    y = true;
+}
+ if(char_exist(x,".*")){
+    y = true;
+}
+ if(char_exist(x,"*")){
+    y = true;
+}
+ if(char_exist(x,"/")){
+     y = true;
+}
+ if(char_exist(x,"\'")){
+     y = true;
+}
+ if(char_exist(x,"^")){
+     y = true;
+}
+ if(char_exist(x,".+")){
+     y = true;
+}
+ if(char_exist(x,".-")){
+     y = true;
+}
+ if(char_exist(x,".^")){
+     y = true;
+}
+ return y;
+}
