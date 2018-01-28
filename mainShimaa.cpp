@@ -5,6 +5,36 @@ if(char_exist(s,"S")||char_exist(s,"T")||char_exist(s,"U")||char_exist(s,"V")||c
 else return false;
 }
 string cleanAllSpace(string x){ for(int i =0; i<x.size(); i++){ if(x.substr(i,1)==" "){x.erase(i,1);}} return x;}
+void charsExistInString(string s,vector <string> &x,int &n){
+    int equality = s.find("=");
+    s = s.substr(equality+1);
+  if(char_exist(s,"A")){x.push_back("A");n++;}
+  if(char_exist(s,"B")){x.push_back("B");n++;}
+   if(char_exist(s,"C")){x.push_back("C");n++;}
+   if(char_exist(s,"D")){x.push_back("D");n++;}
+   if(char_exist(s,"E")){x.push_back("E");n++;}
+   if(char_exist(s,"F")){x.push_back("F");n++;}
+   if(char_exist(s,"G")){x.push_back("G");n++;}
+   if(char_exist(s,"H")){x.push_back("H");n++;}
+   if(char_exist(s,"I")){x.push_back("I");n++;}
+   if(char_exist(s,"J")){x.push_back("J");n++;}
+   if(char_exist(s,"K")){x.push_back("K");n++;}
+   if(char_exist(s,"L")){x.push_back("L");n++;}
+   if(char_exist(s,"M")){x.push_back("M");n++;}
+   if(char_exist(s,"N")){x.push_back("N");n++;}
+   if(char_exist(s,"O")){x.push_back("O");n++;}
+   if(char_exist(s,"P")){x.push_back("P");n++;}
+   if(char_exist(s,"Q")){x.push_back("Q");n++;}
+   if(char_exist(s,"R")){x.push_back("R");n++;}
+   if(char_exist(s,"S")){x.push_back("S");n++;}
+   if(char_exist(s,"T")){x.push_back("T");n++;}
+   if(char_exist(s,"U")){x.push_back("U");n++;}
+   if(char_exist(s,"V")){x.push_back("V");n++;}
+   if(char_exist(s,"W")){x.push_back("W");n++;}
+   if(char_exist(s,"X")){x.push_back("X");n++;}
+   if(char_exist(s,"Y")){x.push_back("Y");n++;}
+   if(char_exist(s,"Z")){x.push_back("Z");n++;}
+}
 int main (int argc, char* argv[]){
     //---------------------input---------------------------------------------------------------------
 vector <string> vars;
