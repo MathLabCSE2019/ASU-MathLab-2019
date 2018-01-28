@@ -443,7 +443,7 @@ CMatrix CMatrix::mpower(double x)
 
     for(int i=0;i<nR;i++)
      for(int j=0;j<nC;j++){
-    if((values[i][j]==0)&&(x==0)) throw ("Error:undefined matrix");
+    if((values[i][j]==0)&&(x==0)) throw ("Error:0 can`t be raised to the power 0");
         result_matrix.values[i][j]=pow(values[i][j],x);
         }
      return result_matrix;
