@@ -35,6 +35,43 @@ void charsExistInString(string s,vector <string> &x,int &n){
    if(char_exist(s,"Y")){x.push_back("Y");n++;}
    if(char_exist(s,"Z")){x.push_back("Z");n++;}
 }
+bool operationExist(string x){
+bool y = false;
+if(char_exist(x,"+")){
+    y = true;
+}
+ if(char_exist(x,"-")){
+   y = true;
+}
+ if(char_exist(x,"./")){
+    y = true;
+}
+ if(char_exist(x,".*")){
+    y = true;
+}
+ if(char_exist(x,"*")){
+    y = true;
+}
+ if(char_exist(x,"/")){
+     y = true;
+}
+ if(char_exist(x,"\'")){
+     y = true;
+}
+ if(char_exist(x,"^")){
+     y = true;
+}
+ if(char_exist(x,".+")){
+     y = true;
+}
+ if(char_exist(x,".-")){
+     y = true;
+}
+ if(char_exist(x,".^")){
+     y = true;
+}
+ return y;
+}
 int main (int argc, char* argv[]){
     //---------------------input---------------------------------------------------------------------
 vector <string> vars;
