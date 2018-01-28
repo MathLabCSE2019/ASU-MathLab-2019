@@ -53,7 +53,7 @@ else { // return R*C Matrix
    cout<<"Variable Does Not Exist!"<<endl;
    nV--;
    }
-   else{nV--;} //for empty
+   else{nV--;cout<<"You don't write any thing!"<<endl;} //for empty
 nV++;
 }else{ // var exist
    if(input[0]!="" && input[0] != "\n"){ // print var line
