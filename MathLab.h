@@ -97,4 +97,6 @@ public:
 	void Cos(CMatrix& matrix);
 	void Csc(CMatrix& matrix);
 	void Sin(CMatrix& matrix);
+	void aSin(CMatrix& matrix);
+	
 };
