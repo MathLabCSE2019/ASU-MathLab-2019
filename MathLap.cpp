@@ -835,5 +835,16 @@ void CMatrix::aSec(CMatrix& matrix)
         }
     }
 }
+    /--------------------------------------------acscFunction------------------------------------------------------
+void CMatrix::aSec(CMatrix& matrix)
+{
+    for(int i=0 ; i<nR ; i++)
+    {
+        for(int j=0 ; j<nC ; j++)
+        {
+            values[i][j] = asin(1/matrix.values[i][j]);
+        }
+    }
+}
 
 
