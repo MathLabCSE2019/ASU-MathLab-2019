@@ -791,5 +791,17 @@ void CMatrix::Cotd(CMatrix& matrix)
     }
 
 }
+    //--------------------------------------------asinFunction------------------------------------------------------
+void CMatrix::aSin(CMatrix& matrix)
+{
+    for(int i=0 ; i<nR ; i++)
+    {
+        for(int j=0 ; j<nC ; j++)
+        {
+            values[i][j] = asin(matrix.values[i][j]);
+        }
+    }
+}
+
 
 
