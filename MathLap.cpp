@@ -520,6 +520,17 @@ CMatrix CMatrix::mlog10() //log function(log to the base 10)
         for(int i=0;i<nR;i++)
           for(int j=0;j<nC;j++)
             {
+                if( values[i][j]<1);
+                throw 1;
+                  try
+                  {
+          output_matrix.values[i][j]=log10(values[i][j]);
+          return output_matrix;
+                  }
+                  catch(int z)
+                  {
+                      cout<<"Error: There is no log value for negative numbers"<<endl;
+                 }
               output_matrix.values[i][j]=log10(values[i][j]);
             }
      return output_matrix;
