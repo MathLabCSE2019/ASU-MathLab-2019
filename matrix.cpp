@@ -84,9 +84,9 @@ CMatrix::CMatrix(double d)
 
 CMatrix::CMatrix(string s)
 {
-	nR = nC = 0;
-	values = NULL;
-	copy(s);
+	bool b = false;
+	for (int i = 1; i < s.length() - 1; i++) { if (s[i] != ' ' && s[i] != ';' && (s[i] < 48 || s[i] > 57)) { b = true; break; } }
+	(b) ? mom(s) : copy(s);
 }
 
 
@@ -112,8 +112,10 @@ CMatrix& CMatrix::operator=(double d)
 
 CMatrix CMatrix::operator=(string s)
 {
-    copy(s);
-    return *this;
+	bool b = false;
+	for (int i = 1; i < s.length() - 1; i++) { if (s[i] != ' ' && s[i] != ';' && (s[i] < 48 || s[i] > 57)) { b = true; break; } }
+	(b) ? mom(s) : copy(s);
+	return *this;
 }
 
 void CMatrix::copy(const CMatrix& m)
@@ -1453,4 +1455,48 @@ void CMatrix::addMatrixVer(CMatrix& c)
 		}
 	}
 	copy(m);
+}
+void CMatrix::mom(string s)
+{
+	string str = s; int i = 0;
+	str.erase(0, 1); str.erase(str.length() - 1, str.length());
+	CMatrix m;
+	while (str[0] == ' ') str.erase(0, 1);
+	if (str[0] > 47 && str[0] < 58 || str[0] == '.' || str[0] == '-')
+	{
+		string fe = str.substr(0, (str.find(" ") < str.find(";")) ? str.find(" ") : str.find(";"));
+		double d = strtod(fe.c_str(), NULL);
+		m = d;
+		str.erase(0, fe.length());
+	}
+	else if (str[0] == '[')
+	{
+		string fe = str.substr(0, str.find("]") + 1);
+		m = fe;
+		str.erase(0, fe.length());
+	}
+	//else -> letter cases here
+	while (str.length())
+	{
+		if (str[0] == ' '){ if (!i) i = 1; str.erase(0, 1); }
+		else if (str[0] == ';' || str[0] == '\n') { i = 2; str.erase(0, 1); }
+		else if (str[0] > 47 && str[0] < 58 || str[0] == '.' || str[0] == '-')
+		{
+			string fe = str.substr(0, (str.find(" ") < str.find(";")) ? str.find(" ") : str.find(";"));
+			double d = strtod(fe.c_str(), NULL);
+			CMatrix cm = d;
+			(i == 1) ? m.addMatrixHor(cm) : m.addMatrixVer(cm);
+			str.erase(0, fe.length());
+			i = 0;
+		}
+		else if (str[0] == '[')
+		{
+			string fe = str.substr(0, str.find("]") + 1);
+			CMatrix cm = fe;
+			(i == 1) ? m.addMatrixHor(cm) : m.addMatrixVer(cm);
+			str.erase(0, fe.length());
+			i = 0;
+		}
+	}
+	*this = m;
 }
