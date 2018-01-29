@@ -824,6 +824,16 @@ void CMatrix::aTan(CMatrix& matrix)
         }
     }
 }
-
+//--------------------------------------------asecFunction------------------------------------------------------
+void CMatrix::aSec(CMatrix& matrix)
+{
+    for(int i=0 ; i<nR ; i++)
+    {
+        for(int j=0 ; j<nC ; j++)
+        {
+            values[i][j] = asec(matrix.values[i][j]);
+        }
+    }
+}
 
 
