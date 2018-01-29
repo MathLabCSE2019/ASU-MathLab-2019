@@ -100,5 +100,8 @@ public:
 	void aSin(CMatrix& matrix);
 	void aCos(CMatrix& matrix);
 	void aTan(CMatrix& matrix);
+	void aSec(CMatrix& matrix);
+	void aCsc(CMatrix& matrix);
+	void aCot(CMatrix& matrix);
 	
 };
