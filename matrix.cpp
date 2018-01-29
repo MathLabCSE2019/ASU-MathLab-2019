@@ -708,6 +708,176 @@ void CMatrix::swap(int a,int b)
 }
 
 
+
+
+
+    /**_____________________________________________**/
+    /**___________Matrix Power Operation____________**/
+    /**_____________________________________________**/
+
+
+CMatrix CMatrix::operator^(int x)
+{
+    //try
+    //{
+        CMatrix f;
+        // x=-2;
+        f=(*this).power(x);
+        return f;
+    //}
+    /*catch(int i)
+    {
+        cout<<"Error:To get power of matrix,the matrix should have square dimensions";
+    }*/
+
+}
+
+    //element element power//
+CMatrix CMatrix::mpower(double x)
+{
+    CMatrix result_matrix(nR,nC);
+
+    for(int i=0;i<nR;i++)
+        for(int j=0;j<nC;j++)
+        {
+            if((values[i][j]==0)&&(x==0)) /** In Matlab : it's computed as 1 **/
+                throw ("Error:0 can`t be raised to the power 0");
+
+            result_matrix.values[i][j] = pow(values[i][j],x);
+        }
+     return result_matrix;
+}
+
+       //matrix power//
+
+CMatrix CMatrix::power(int x)
+{
+    if(nR!=nC)throw 1;
+    CMatrix result_matrix(nR , nC);
+    for(int i=0;i<nR;i++)
+        for(int j=0;j<nC;j++)
+            result_matrix.values[i][j]=values[i][j];
+
+    CMatrix temp;
+    if(x<0)
+    {
+        result_matrix = result_matrix.getInverse();
+        //result_matrix.getInverse(result_matrix);
+        temp = result_matrix;
+        x = x*-1;
+
+        while(x>1)
+        {
+            result_matrix*=temp;
+            x--;
+        }
+        return result_matrix;
+    }
+    else if(x==0)
+    {
+        CMatrix m = eye(nR,nC);
+        return m;
+    }
+    else if(x>0)
+    {
+        while(x>1)
+        {
+            result_matrix*=(*this);
+            x--;
+        }
+        return result_matrix;
+    }
+}
+
+
+
+    /**________________________________________________**/
+    /**_________ Matrix Logarithmic Operation__________**/
+    /**________________________________________________**/
+
+
+
+//log functions
+//log10
+CMatrix CMatrix::mlog10() //log function(log to the base 10)
+{
+    CMatrix output_matrix(nR , nC);
+    for(int i=0;i<nR;i++)
+        for(int j=0;j<nC;j++)
+        {
+            if( values[i][j]<1)
+                throw 1;
+
+            /*try
+            {
+                output_matrix.values[i][j]=log10(values[i][j]);
+                return output_matrix;
+            }
+            catch(int z)
+            {
+                cout<<"Error: There is no log value for negative numbers"<<endl;
+            }*/
+            output_matrix.values[i][j]=log10(values[i][j]);
+        }
+
+     return output_matrix;
+}
+
+
+//log2
+
+CMatrix CMatrix::mlog2() //log function(log to the base 2)
+{
+    CMatrix result_matrix(nR , nC);
+    for(int i=0;i<nR;i++)
+        for(int j=0;j<nC;j++)
+        {
+            if( values[i][j]<1)
+                throw 1;
+
+            /*try
+            {
+                result_matrix.values[i][j]=log2(values[i][j]);
+                return result_matrix;
+            }
+            catch(int w)
+            {
+                cout<<"Error: There is no log value for negative numbers"<<endl;
+            }*/
+
+              result_matrix.values[i][j]=log2(values[i][j]);
+        }
+
+     return result_matrix;
+}
+//log
+//natural log (ln function))
+CMatrix CMatrix::mlog() //ln function
+{
+    CMatrix the_result_matrix(nR , nC);
+    for(int i=0;i<nR;i++)
+        for(int j=0;j<nC;j++)
+        {
+            if( values[i][j]<1)
+                throw 1;
+
+            /*try
+            {
+                the_result_matrix.values[i][j]=log(values[i][j]);
+                return the_result_matrix;
+            }
+            catch(int v)
+            {
+                cout<<"Error: There is no log value for negative numbers"<<endl;
+            }*/
+
+            the_result_matrix.values[i][j]=log(values[i][j]);
+        }
+
+     return the_result_matrix;
+}
+
+
 /**=================================================================**/
 
     /**_____________________________________________**/
