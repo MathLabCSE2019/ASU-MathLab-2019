@@ -831,7 +831,7 @@ void CMatrix::aSec(CMatrix& matrix)
     {
         for(int j=0 ; j<nC ; j++)
         {
-            values[i][j] = asec(matrix.values[i][j]);
+            values[i][j] = acos(1/matrix.values[i][j]);
         }
     }
 }
