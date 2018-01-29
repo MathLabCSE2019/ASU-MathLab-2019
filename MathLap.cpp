@@ -632,6 +632,10 @@ void CMatrix:: sqrtm(CMatrix& matrix)
             {
             cout<<Result[i][j].real<<Result[i][j].imag<<'i'<<"\t";
             }
+            else
+            {
+            cout<<Result[i][j].real<<'+'<<Result[i][j].imag<<'i'<<"\t";
+            }
         }
         cout<<"\n";
     }
