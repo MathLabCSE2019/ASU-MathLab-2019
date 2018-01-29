@@ -514,12 +514,12 @@ CMatrix eye(int R , int C)
     }
 }
 //log functions
-CMatrix CMatrix::mlog10() //log function(log to the base 10)
 {
     CMatrix output_matrix(nR , nC);
         for(int i=0;i<nR;i++)
           for(int j=0;j<nC;j++)
-            {
+            {CMatrix CMatrix::mlog10() //log function(log to the base 10)
+
                 if( values[i][j]<1);
                 throw 1;
                   try
@@ -543,6 +543,18 @@ CMatrix CMatrix::mlog2() //log function(log to the base 2)
         for(int i=0;i<nR;i++)
           for(int j=0;j<nC;j++)
             {
+                if( values[i][j]<1);
+                throw 1;
+                  try
+                  {
+          result_matrix.values[i][j]=log2(values[i][j]);
+          return result_matrix;
+                  }
+                  catch(int z)
+                  {
+                      cout<<"Error: There is no log value for negative numbers"<<endl;
+                 }
+
               result_matrix.values[i][j]=log2(values[i][j]);
             }
      return result_matrix;
