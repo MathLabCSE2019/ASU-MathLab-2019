@@ -243,6 +243,52 @@ public:
     	CMatrix mlog2(); //log function to the base 2
 
     	CMatrix mlog(); //log function (ln)	
+	
+	
+
+    /**________________________________________________**/
+    /**_________Matrix Trignometric Operation__________**/
+    /**________________________________________________**/
+
+    	friend CMatrix Sin(CMatrix matrix);
+
+    	friend CMatrix Cos(CMatrix matrix);
+
+    	friend CMatrix Tan(CMatrix matrix);
+
+    	friend CMatrix Csc(CMatrix matrix);
+
+    	friend CMatrix Sec(CMatrix matrix);
+
+    	friend CMatrix Cot(CMatrix matrix);
+
+    	friend CMatrix Sind(CMatrix matrix);
+
+    	friend CMatrix Cosd(CMatrix matrix);
+
+    	friend CMatrix Tand(CMatrix matrix);
+
+    	friend CMatrix Cscd(CMatrix matrix);
+
+    	friend CMatrix Secd(CMatrix matrix);
+
+    	friend CMatrix Cotd(CMatrix matrix);
+
+	friend CMatrix aSin(CMatrix matrix);
+
+	friend CMatrix aCos(CMatrix matrix);
+
+	friend CMatrix aTan(CMatrix matrix);
+
+	friend CMatrix aCsc(CMatrix matrix);
+
+	friend CMatrix aSec(CMatrix matrix);
+
+	friend CMatrix aCot(CMatrix matrix);
+
+    	friend CMatrix squareRoot(CMatrix matrix);
+
+    	//void sqrtm(CMatrix& matrix);
 
 };
 
@@ -258,4 +304,4 @@ CMatrix eye(int R = 1 , int C = 0);
 
 CMatrix zeros(int R = 1 , int C = 0);
 
-    CMatrix ones(int R = 1 , int C = 0);
+CMatrix ones(int R = 1 , int C = 0);
