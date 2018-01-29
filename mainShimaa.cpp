@@ -18,7 +18,7 @@ for(int i=0;i<x.size();i++){
     for(int j=0;j<c.length();j++){
         if(c.substr(j,1)==" ")c.erase(i,1);
     }
-    if( !x[i].compare(c)){
+    if( x[i].substr(0,1) == c.substr(0,1)){
         pos = i;
     }
 }
@@ -59,6 +59,12 @@ bool isThereChars(string s){
 if(char_exist(s,"A")||char_exist(s,"B")||char_exist(s,"C")||char_exist(s,"D")||char_exist(s,"E")||char_exist(s,"F")||char_exist(s,"G")||char_exist(s,"H")||char_exist(s,"I"))return true;
 if(char_exist(s,"J")||char_exist(s,"K")||char_exist(s,"L")||char_exist(s,"M")||char_exist(s,"N")||char_exist(s,"O")||char_exist(s,"P")||char_exist(s,"Q")||char_exist(s,"R"))return true;
 if(char_exist(s,"S")||char_exist(s,"T")||char_exist(s,"U")||char_exist(s,"V")||char_exist(s,"W")||char_exist(s,"X")||char_exist(s,"Y")||char_exist(s,"Z"))return true;
+else return false;
+}
+bool isTherechars(string s){
+if(char_exist(s,"a")||char_exist(s,"b")||char_exist(s,"c")||char_exist(s,"d")||char_exist(s,"e")||char_exist(s,"f")||char_exist(s,"g")||char_exist(s,"h")||char_exist(s,"i"))return true;
+if(char_exist(s,"j")||char_exist(s,"k")||char_exist(s,"l")||char_exist(s,"m")||char_exist(s,"n")||char_exist(s,"o")||char_exist(s,"p")||char_exist(s,"q")||char_exist(s,"r"))return true;
+if(char_exist(s,"s")||char_exist(s,"t")||char_exist(s,"u")||char_exist(s,"v")||char_exist(s,"w")||char_exist(s,"x")||char_exist(s,"y")||char_exist(s,"z"))return true;
 else return false;
 }
 
@@ -323,10 +329,11 @@ if(!flage)nR++;
 cout<<nR<<"=="<<line<<"=="<<nRin<<endl;
 return (nR + line + nRin);
 }
-void charsExistInString(string s,vector <string> &x,int &n){
+int  charsExistInString(string s,vector <string> &x,int &n , vector <string> vars , vector <CMatrix> varValues){
+    int type = 0 ,m;
     int equality = s.find("=");
     s = s.substr(equality+1);
-  if(char_exist(s,"A")){x.push_back("A");n++;}
+  if(char_exist(s,"A")){x.push_back("A");n++;if(exist(vars,"A")){int i = pos_search(vars,"A");if(varValues[i].getnC()==1&&varValues[i].getnR()==1)return 1;}else{cout<<"There is undefined variable"<<endl;return;}}
   if(char_exist(s,"B")){x.push_back("B");n++;}
    if(char_exist(s,"C")){x.push_back("C");n++;}
    if(char_exist(s,"D")){x.push_back("D");n++;}
@@ -352,6 +359,7 @@ void charsExistInString(string s,vector <string> &x,int &n){
    if(char_exist(s,"X")){x.push_back("X");n++;}
    if(char_exist(s,"Y")){x.push_back("Y");n++;}
    if(char_exist(s,"Z")){x.push_back("Z");n++;}
+   return 5;
 }
 double checkForArithmatic(string aa){
 double b;
@@ -420,9 +428,9 @@ for(int i =op-1;i<s.size();i--){
 if(operation=="+")opResult = a + b;
 else if(operation=="-")opResult = a - b;
 else if(operation=="*")opResult = a*b;
-else if(operation=="/")opResult = a/b;
+else if(operation=="/"){if(b!=0)opResult = a/b;else {cout<<"Undefined Operation"<<endl;opResult=0;}}
 else if(operation=="^")opResult=pow(a,b);
-cout<<"a: "<<a<<" b: "<<b<<" op: "<<operation<<" result: "<<opResult<<endl;
+//cout<<"a: "<<a<<" b: "<<b<<" op: "<<operation<<" result: "<<opResult<<endl;
 
 ostringstream ss;
 ss<<opResult;
@@ -487,8 +495,8 @@ double oneToOneOperationCalculation(string s){ //operation for matrix 1*1
     s = s.substr(s.find("=")+1);
     s = cleanAllSpace(s);
   int braket = s.find("(");
- if(braket<=0){
-   //  cout<<"@@@@"<<endl;
+ if(braket<0 && braket<1000){
+    // cout<<"@@@@"<<endl;
     result = stringOperation(s);
  }else{
  int endBraket = s.find(")",braket);
@@ -510,7 +518,7 @@ ostringstream ss;
 ss<<result;
 s = s.replace(braket,endBraket-braket+1,ss.str());
     //cout<<"in "<<s<<endl;
-    //cout<<"inn "<<opString<<" result: "<<result<<endl;
+   // cout<<"inn "<<opString<<" result: "<<result<<endl;
    // cout<<braket<<" "<<endBraket<<endl;
   endBraket = s.find(")",endBraket+1);
   if(endBraket<0 && k>0){
@@ -527,7 +535,7 @@ if(s.find("-") == 0 && operationExist(s.substr(1))){
    // cout<<" ##";
 result = stringOperation(s);}
 }}
-cout<<"$$$ "<<result<<endl;
+//cout<<"$$$ "<<result<<endl;
 return result;
 }
 
@@ -536,30 +544,147 @@ int main (int argc, char* argv[]){
 vector <string> vars;
 CMatrix varValues[1000];
 int nV = 0 ;
+int varExists = 0;
     string input[10] = ""; //for multi-line input
     int nLine = 1; // number of line in any input
     //-------------------read input from file--------------------------------------------------------
 ifstream in ("advexample.m");
 if(in.is_open()){
     while( !in.eof() ){
-    getline(in,input[0]);
-    cout<<input[0]<<endl;
+    if(!varExists)getline(in,input[0]);
+    cout<<"Input: "<<input[0]<<endl;
     input[0] = cleanString(input[0]);
     int semicolon = input[0].find(";");
 if(semicolon>0)input[0].erase(semicolon,1);
-    cout<<input[0]<<endl;
+   // cout<<input[0]<<endl;
     string tvar = varChar(input[0]);
-    if(!exist(vars,tvar)){ //var not exist
+    if(!exist(vars,tvar)){ //------------ var not exist -----------------//
         if(char_exist(input[0],"=")){ //for multi-line
                 vars.push_back(tvar);
-                cout<<"**"<<tvar<<endl;}
+         //       cout<<"**"<<tvar<<endl;
+         }
     int inputBegNum = countChar(input[0],'[');
     int inputEndNum = countChar(input[0],']');
     if((inputBegNum>0||inputEndNum>0)&&(inputBegNum == inputEndNum)&&(nLine == 1)){ //check for one line input
       nLine = 1;
-      cout<<"one line input!"<<endl;
+      //cout<<"one line input!"<<endl;
     }else if(inputBegNum>0||inputEndNum>0){ //check for multi-line input
-      cout<<"multi-line input!"<<endl;
+      //cout<<"multi-line input!"<<endl;
+       if(nLine==1){input[1] = input[0];
+       nLine = 2;}
+       else{
+       cout<<"this is the full line"<<endl<<input[1]<<endl<<input[0]<<endl;
+        nLine = 1;nV--;}}
+   else if(char_exist(input[0],"=")){ // this is operation ------------------------------------------
+   //cout<<"operation!"<<endl;
+   vector <string> varsInOperation;
+   int n = 0;
+int type = charsExistInString(input[0],varsInOperation,n,vars,varValues); // know all matrix variables in the operation
+if(type == 1 && operationExist(input[0])){ // return 1*1 matrix
+int a = countChar(input[0],'(');
+int b = countChar(input[0],')');
+if(a != b){
+    cout<<"Invalid Input!"<<endl;
+    //----------------------------------------------------------------------------------------------
+}
+else{
+if(varsInOperation.)        
+varValues[nV] = oneToOneOperationCalculation(input[0]);
+cout <<vars[nV]<<" = "<<endl<<varValues[nV]<<endl;}
+}
+else if (n==0 && isTherechars(input[0])){ // return MI Matrix
+int nc,nr;
+string c,r;
+input[0]=cleanAllSpace(input[0]);
+r = input[0].substr(input[0].find("(")+1,input[0].find(",")-input[0].find("(")-1);
+c = input[0].substr(input[0].find(",")+1,input[0].find(")")-input[0].find(",")-1);
+nr = stof(r);
+nc = stof(c);
+if(input[0].find("rand")>0 && input[0].find("rand")<10){
+//cout<<"r: "<<r<<" c: "<<c<<endl;
+varValues[nV] = CMatrix(nr,nc,CMatrix::MI_RAND);
+cout<<vars[nV]<<" = "<<endl<< varValues[nV] <<endl;
+}
+else if(input[0].find("eye")>0 && input[0].find("eye")<10){
+varValues[nV] = CMatrix(nr,nc,CMatrix::MI_EYE);
+cout<<vars[nV]<<" = "<<endl<< varValues[nV] <<endl;
+}
+else if(input[0].find("zeros")>0 && input[0].find("zeros")<10){
+varValues[nV] = CMatrix(nr,nc,CMatrix::MI_ZEROS);
+cout<<vars[nV]<<" = "<<endl<< varValues[nV] <<endl;
+}
+else if(input[0].find("ones")>0 && input[0].find("ones")<10){
+varValues[nV] = CMatrix(nr,nc,CMatrix::MI_ONES);
+cout<<vars[nV]<<" = "<<endl<< varValues[nV] <<endl;
+}
+}
+/*for(int i=0; i<n;i++){
+    cout<<varsInOperation[i]<<"&&&";
+}cout<<n<<endl;*/
+else if(numExist(input[0])){ // equal number
+input[0] = cleanAllSpace(input[0]);
+string s = input[0].substr(input[0].find("=")+1);
+//cout<<s<<endl;
+varValues[nV] = stof(s);
+cout<<vars[nV]<<" = "<<endl<< varValues[nV] <<endl;
+}
+else if(isThereChars(input[0])){ // equal with another CMatrix
+input[0] = cleanAllSpace(input[0]);
+int pos = input[0].find("=");
+string s = input[0].substr(pos+1);
+int n = pos_search(vars,s);
+varValues[nV] = varValues[n];
+cout<<vars[nV]<<" = "<<endl<< varValues[nV] <<endl;
+}
+else { // return R*C Matrix
+
+}
+   }
+   else if(isThereChars(input[0])){ // print var line
+   cout<<"Variable Does Not Exist!"<<endl;
+   nV--;
+   }
+   else{nV--;cout<<"You don't write any thing!"<<endl;} //for empty
+nV++;
+varExists = 0;
+}else{  //------------ var exist -----------------//
+input[0] = cleanAllSpace(input[0]);
+int n = pos_search(vars,input[0]);
+   if(isThereChars(input[0]) && !operationExist(input[0]) && !numExist(input[0])){ // print var line
+    cout<<vars[n]<<" = "<<endl<< varValues[n] <<endl;
+   }
+   else{
+vars.erase(vars.begin()+n);
+varValues[n] = 0;
+   varExists = 1;
+   nV--;
+   }
+}
+}}
+else{cout<<"File Does Not Open"<<endl;}
+//-------------------cin input and press zero to exit--------------------------------------------------------
+do{
+    if(!varExists)getline(cin,input[0]);
+    cout<<"Input: "<<input[0]<<endl;
+    input[0] = cleanString(input[0]);
+    int semicolon = input[0].find(";");
+if(semicolon>0)input[0].erase(semicolon,1);
+  //  cout<<input[0]<<endl;
+    string tvar = varChar(input[0]);
+  //  cout <<tvar<<" " <<exist(vars,tvar)<<endl;
+    if(!exist(vars,tvar)){ //var not exist
+    //        cout<<"Not existsssssssssssss"<<endl;
+        if(char_exist(input[0],"=")){ //for multi-line
+                vars.push_back(tvar);
+    //            cout<<"**"<<tvar<<endl;
+    }
+    int inputBegNum = countChar(input[0],'[');
+    int inputEndNum = countChar(input[0],']');
+    if((inputBegNum>0||inputEndNum>0)&&(inputBegNum == inputEndNum)&&(nLine == 1)){ //check for one line input
+      nLine = 1;
+      //cout<<"one line input!"<<endl;
+    }else if(inputBegNum>0||inputEndNum>0){ //check for multi-line input
+      //cout<<"multi-line input!"<<endl;
        if(nLine==1){input[1] = input[0];
        nLine = 2;}
        else{
@@ -571,15 +696,60 @@ if(semicolon>0)input[0].erase(semicolon,1);
    int n = 0;
 charsExistInString(input[0],varsInOperation,n); // know all matrix variables in the operation
 if(n == 0 && operationExist(input[0])){ // return 1*1 matrix
-varValues[nV] = oneToOneOperationCalculation(input[0]);
-//cout << varValues[nV]<<endl;
+int a = countChar(input[0],'(');
+int b = countChar(input[0],')');
+if(a != b){
+    cout<<"Invalid Input!"<<endl;
 }
-else if (n==0){ // return MI Matrix
-
+else{
+varValues[nV] = oneToOneOperationCalculation(input[0]);
+cout <<vars[nV]<<" = "<<endl<<varValues[nV]<<endl;}
+}
+else if (n==0 && isTherechars(input[0])){ // return MI Matrix
+int nc,nr;
+string c,r;
+input[0]=cleanAllSpace(input[0]);
+r = input[0].substr(input[0].find("(")+1,input[0].find(",")-input[0].find("(")-1);
+c = input[0].substr(input[0].find(",")+1,input[0].find(")")-input[0].find(",")-1);
+nr = stof(r);
+nc = stof(c);
+if(input[0].find("rand")>0 && input[0].find("rand")<10){
+//cout<<"r: "<<r<<" c: "<<c<<endl;
+varValues[nV] = CMatrix(nr,nc,CMatrix::MI_RAND);
+cout<<vars[nV]<<" = "<<endl<< varValues[nV] <<endl;
+}
+else if(input[0].find("eye")>0 && input[0].find("eye")<10){
+varValues[nV] = CMatrix(nr,nc,CMatrix::MI_EYE);
+cout<<vars[nV]<<" = "<<endl<< varValues[nV] <<endl;
+}
+else if(input[0].find("zeros")>0 && input[0].find("zeros")<10){
+varValues[nV] = CMatrix(nr,nc,CMatrix::MI_ZEROS);
+cout<<vars[nV]<<" = "<<endl<< varValues[nV] <<endl;
+}
+else if(input[0].find("ones")>0 && input[0].find("ones")<10){
+varValues[nV] = CMatrix(nr,nc,CMatrix::MI_ONES);
+cout<<vars[nV]<<" = "<<endl<< varValues[nV] <<endl;
+}
 }
 /*for(int i=0; i<n;i++){
     cout<<varsInOperation[i]<<"&&&";
 }cout<<n<<endl;*/
+else if(numExist(input[0])){ // equal number
+      //  cout<<"@@@@@@@@@@@@@@@@@@@@@@@@@@@"<<endl;
+input[0] = cleanAllSpace(input[0]);
+string s = input[0].substr(input[0].find("=")+1);
+//cout<<s<<endl;
+varValues[nV] = stof(s);
+cout<<vars[nV]<<" = "<<endl<< varValues[nV] <<endl;
+}
+else if(isThereChars(input[0])){ // equal with another CMatrix
+input[0] = cleanAllSpace(input[0]);
+int pos = input[0].find("=");
+string s = input[0].substr(pos+1);
+int n = pos_search(vars,s);
+varValues[nV] = varValues[n];
+cout<<vars[nV]<<" = "<<endl<< varValues[nV] <<endl;
+}
 else { // return R*C Matrix
 
 }
@@ -590,13 +760,24 @@ else { // return R*C Matrix
    }
    else{nV--;cout<<"You don't write any thing!"<<endl;} //for empty
 nV++;
+varExists = 0;
 }else{ // var exist
-   if(input[0]!="" && input[0] != "\n"){ // print var line
-    int pos = pos_search(vars,tvar);
-    cout<<"var exist at pos "<<pos<<endl;
+input[0] = cleanAllSpace(input[0]);
+int n = pos_search(vars,input[0]);
+   if(isThereChars(input[0]) && !operationExist(input[0]) && !numExist(input[0])){ // print var line
+    cout<<vars[n]<<" = "<<endl<< varValues[n] <<endl;
+   }
+   else{
+vars.erase(vars.begin()+n);
+varValues[n] = 0;
+   varExists = 1;
+   nV--;
    }
 }
-}}
-else{cout<<"File Does Not Open"<<endl;}
+}while(input[0] != "exit" && input[0] != "Exit" && input[0] != "0");
+//CMatrix x = CMatrix("[1 2 3 4; 1 2 3 4]");
+//CMatrix c = CMatrix("[5 6 7 8; 5 6 7 8]");
+//c.addMatrixVer(x);
+//cout<<c<<endl;
 return 0;
 }
