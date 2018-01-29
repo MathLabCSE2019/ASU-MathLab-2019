@@ -536,6 +536,19 @@ CMatrix CMatrix::mlog2() //log function(log to the base 2)
             }
      return result_matrix;
 }
+//log
+//natural log (ln function))
+CMatrix CMatrix::mlog() //ln function
+{
+    CMatrix the_result_matrix(nR , nC);
+        for(int i=0;i<nR;i++)
+          for(int j=0;j<nC;j++)
+          {
+            the_result_matrix.values[i][j]=log(values[i][j]);
+          }
+     return the_result_matrix;
+}
+
 
 
 

@@ -88,6 +88,7 @@ public:
     CMatrix power(int);//matrix power
     CMatrix mlog10(); //log function to the base 10
     CMatrix mlog2(); //log function to the base 2
+    CMatrix mlog(); //log function (ln)
 };
     CMatrix eye(int R = 1 , int C = 0);
 
