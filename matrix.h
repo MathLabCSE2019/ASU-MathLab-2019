@@ -290,6 +290,9 @@ public:
 
     	//void sqrtm(CMatrix& matrix);
 
+	void addMatrixHor(CMatrix& c);
+	void addMatrixVer(CMatrix& c);
+
 };
 
 

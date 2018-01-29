@@ -1423,3 +1423,34 @@ CMatrix ones(int R , int C)
         return result_matrix;
     }
 }
+
+
+void CMatrix::addMatrixHor(CMatrix& c)
+{
+	CMatrix m; m.nR = this->nR; m.nC = this->nC + c.nC;
+	m.values = new double*[m.nR];
+	for (int ir = 0; ir < nR; ir++)
+	{
+		m.values[ir] = new double[m.nC];
+		for (int ic = 0; ic < m.nC; ic++)
+		{
+			m.values[ir][ic] = (ic < nC) ? values[ir][ic] : c.values[ir][ic - nC];
+		}
+	}
+	copy(m);
+}
+
+void CMatrix::addMatrixVer(CMatrix& c)
+{
+	CMatrix m; m.nR = this->nR + c.nR; m.nC = this->nC;
+	m.values = new double*[m.nR];
+	for (int ir = 0; ir < m.nR; ir++)
+	{
+		m.values[ir] = new double[m.nC];
+		for (int ic = 0; ic < m.nC; ic++)
+		{
+			m.values[ir][ic] = (ir < nR) ? values[ir][ic] : c.values[ir - nR][ic];
+		}
+	}
+	copy(m);
+}
