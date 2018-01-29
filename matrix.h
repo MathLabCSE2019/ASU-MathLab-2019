@@ -177,7 +177,7 @@ public:
     /**_____________Matrix Manipulation_____________**/
     /**_____________________________________________**/
 
-    void print();
+    	void print();
 
 	void reset();
 
@@ -215,11 +215,34 @@ public:
 
 	CMatrix getInverse();
 
-    void sweep(int a,int b);
+    	void sweep(int a,int b);
 
-    void fix(int &a,int &b,int &s);
+    	void fix(int &a,int &b,int &s);
 
-    void swap(int a,int b);
+    	void swap(int a,int b);
+
+	
+    /**_____________________________________________**/
+    /**___________Matrix Power Operation____________**/
+    /**_____________________________________________**/
+
+    	CMatrix operator^(int);//matrix power operator
+
+    	CMatrix mpower(double);//elements power
+
+    	CMatrix power(int);//matrix power
+
+
+
+    /**________________________________________________**/
+    /**_________ Matrix Logarithmic Operation__________**/
+    /**________________________________________________**/
+
+    	CMatrix mlog10(); //log function to the base 10
+
+    	CMatrix mlog2(); //log function to the base 2
+
+    	CMatrix mlog(); //log function (ln)	
 
 };
 
@@ -228,10 +251,11 @@ public:
     /**___________Matrix Outer Operation____________**/
     /**_____________________________________________**/
 
-    CMatrix mrand(int R = 1 , int C = 0);
 
-    CMatrix eye(int R = 1 , int C = 0);
+CMatrix mrand(int R = 1 , int C = 0);
 
-    CMatrix zeros(int R = 1 , int C = 0);
+CMatrix eye(int R = 1 , int C = 0);
+
+CMatrix zeros(int R = 1 , int C = 0);
 
     CMatrix ones(int R = 1 , int C = 0);
