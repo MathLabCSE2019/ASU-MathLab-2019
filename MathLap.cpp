@@ -513,6 +513,16 @@ CMatrix eye(int R , int C)
         return result_matrix;
     }
 }
+CMatrix CMatrix::mlog10() //log function(log to the base 10)
+{
+    CMatrix output_matrix(nR , nC);
+        for(int i=0;i<nR;i++)
+          for(int j=0;j<nC;j++)
+            {
+              output_matrix.values[i][j]=log10(values[i][j]);
+            }
+     return output_matrix;
+}
 
 
 
