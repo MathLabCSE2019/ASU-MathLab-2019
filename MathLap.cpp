@@ -550,7 +550,7 @@ CMatrix CMatrix::mlog2() //log function(log to the base 2)
           result_matrix.values[i][j]=log2(values[i][j]);
           return result_matrix;
                   }
-                  catch(int z)
+                  catch(int w)
                   {
                       cout<<"Error: There is no log value for negative numbers"<<endl;
                  }
@@ -567,6 +567,17 @@ CMatrix CMatrix::mlog() //ln function
         for(int i=0;i<nR;i++)
           for(int j=0;j<nC;j++)
           {
+              if( values[i][j]<1);
+                throw 1;
+                  try
+                  {
+          the_result_matrix.values[i][j]=log(values[i][j]);
+          return the_result_matrix;
+                  }
+                  catch(int v)
+                  {
+                      cout<<"Error: There is no log value for negative numbers"<<endl;
+                 }
             the_result_matrix.values[i][j]=log(values[i][j]);
           }
      return the_result_matrix;
