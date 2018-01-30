@@ -112,7 +112,7 @@ where example.m is a test file with a given input inside
 
 ## Our Team
 
-Grouping is based on responsibilities
+Grouping is based on [responsibilities distribution of Phase 2](https://github.com/MathLabCSE2019/AsuMathLabG01/issues/2)
 
 ### Group 1
 * Shimaa Hassan
@@ -129,4 +129,76 @@ Grouping is based on responsibilities
 ### Group 3
 * Doaa Essam
 * Hanan Samir
+
+___
+
+## Contribution
+
+Anyone can contribute to this project in two conditions :
+
+### Forking 
+'''Fork''' the project to your account and if you want to add ypur update , make a pull reques
+
+### Committment to our coding style
+#### functions
+In .h files
+```bash
+<return_type> <function_identifier> (<parameters_list>);
+```
+
+In .cpp files (if it's not a class)
+```bash
+<return_type> <function_identifier> (<parameters_list>) //function header
+{
+    //statements 
+    //(function body)
+}
+```
+
+In .cpp files (if it's a class)
+```bash
+<return_type> <class_identifier>::<function_identifier> (<parameters_list>) //function header
+{
+    //statements 
+    //(function body)
+}
+```
+#### loops
+```bash
+for(<initialization> ; <condition> ; <increment>)
+{
+    //body
+}
+```
+```bash
+while(<condition>)
+{
+    //body
+}
+```
+```bash
+if(<condition>)
+{
+    //do something
+}
+else if(<condition>)
+{
+    //do something
+}
+else
+{
+    //do something
+}
+```
+___
+## Author
+
+* Mahomoud Hamdy ([SuperMoody](https://github.com/SuperMoody))
+
+___
+## Licence
+
+This project is licensed under the Apache 2.0 License - see the [LICENSE.md](https://github.com/MathLabCSE2019/AsuMathLabG01/blob/add-license-1/LICENSE) file for details
+
+
 
