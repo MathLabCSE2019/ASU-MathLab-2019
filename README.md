@@ -4,6 +4,13 @@
 * [Overview](README.md#overview)
 * [Specifications](README.md#specifications)
 * [Phases](README.md#phases)
+* [Phase 1: Core Operations](README.md#phase-1-core-operations)
+* [Phase 2: Advanced Operations and Tuning](README.md#phase-2-advanced-operations-and-tuning)
+* [How to use ?](README.md#how-to-use-)
+* [Our Team](README.md#our-team)
+* [Contribution](README.md#contribution)
+* [Author](README.md#author)
+* [Licence](README.md#licence)
 
 
 ## Overview
@@ -191,11 +198,13 @@ else
 }
 ```
 ___
+
 ## Author
 
 * Mahomoud Hamdy ([SuperMoody](https://github.com/SuperMoody))
 
 ___
+
 ## Licence
 
 This project is licensed under the Apache 2.0 License - see the [LICENSE.md](https://github.com/MathLabCSE2019/AsuMathLabG01/blob/add-license-1/LICENSE) file for details
