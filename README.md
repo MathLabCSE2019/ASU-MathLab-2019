@@ -144,7 +144,7 @@ ___
 Anyone can contribute to this project in two conditions :
 
 ### Forking 
-```Fork``` the project to your account and if you want to add ypur update , make a pull reques
+```Fork``` the project to your account and if you want to add your update , make a pull request
 
 ### Committment to our coding style
 #### functions
