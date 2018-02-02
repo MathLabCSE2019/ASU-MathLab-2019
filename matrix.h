@@ -292,7 +292,6 @@ public:
 
 	void addMatrixHor(CMatrix& c);
 	void addMatrixVer(CMatrix& c);
-	void mom(string s);
 };
 
 

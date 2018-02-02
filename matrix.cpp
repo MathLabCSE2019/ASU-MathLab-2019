@@ -84,9 +84,7 @@ CMatrix::CMatrix(double d)
 
 CMatrix::CMatrix(string s)
 {
-	bool b = false;
-	for (int i = 1; i < s.length() - 1; i++) { if (s[i] != ' ' && s[i] != ';' && (s[i] < 48 || s[i] > 57)) { b = true; break; } }
-	(b) ? mom(s) : copy(s);
+	copy(s);
 }
 
 
@@ -112,9 +110,7 @@ CMatrix& CMatrix::operator=(double d)
 
 CMatrix CMatrix::operator=(string s)
 {
-	bool b = false;
-	for (int i = 1; i < s.length() - 1; i++) { if (s[i] != ' ' && s[i] != ';' && (s[i] < 48 || s[i] > 57)) { b = true; break; } }
-	(b) ? mom(s) : copy(s);
+	copy(s);
 	return *this;
 }
 
@@ -148,32 +144,68 @@ void CMatrix::copy(double d)
 void CMatrix::copy(string s)
 {
 	reset();
-	nR = count(s.begin(), s.end(), ';') + 1;
-	nC = count(s.begin(), s.end(), ' ') / nR + 1;
-	if ((nR*nC) == 0){ values = NULL; return; }
-	values = new double*[nR];
-	string token;
-	for (int iR = 0; iR < nR; iR++)
+	string str = s; int i = 0, x = 0;// noe = 0, cnoe = 0;
+	str.erase(0, 1); str.erase(str.length() - 1, str.length());
+	CMatrix m[2];
+	while (str[0] == ' ') str.erase(0, 1);
+	if (str[0] > 47 && str[0] < 58 || str[0] == '.' || str[0] == '-')
 	{
-		values[iR] = new double[nC];
-		for (int iC = 0; iC < nC; iC++)
-		{
-		    string value;
-		    if (s.find("; ")<999999999999) {
-			if (!(s.find(" ")) && !(s.find(";"))) {value = s.substr(1, s.find("]")); s.erase(1, s.find("]"));}
-			else if (s.find(" ") < s.find(";")) {value = s.substr(1, s.find(" ")); s.erase(1, s.find(" "));}
-			else {value = s.substr(1, s.find(";")); s.erase(1, s.find(";")+1);}
-			values[iR][iC] = strtod(value.c_str(), NULL);}
-			else {
-            if (!(s.find(" ")) && !(s.find(";"))) token = "]";
-			else if (s.find(" ") < s.find(";")) token = " ";
-			else token = ";";
-			value = s.substr(1, s.find(token)); s.erase(1, s.find(token));
-			values[iR][iC] = strtod(value.c_str(), NULL);
-			}
-		}
+		//noe++;
+		string fe = str.substr(0, (str.find(" ") < str.find(";")) ? str.find(" ") : str.find(";"));
+		double d = strtod(fe.c_str(), NULL);
+		m[0] = d;
+		str.erase(0, fe.length());
 	}
-	//delete[] buffer;
+	else if (str[0] == '[')
+	{
+		//noe++;
+		string fe = str.substr(0, str.find("]") + 1);
+		m[0] = fe;
+		str.erase(0, fe.length());
+	}
+	/*else
+	{
+	string fe = str.substr(0, (str.find(" ") < str.find(";")) ? str.find(" ") : str.find(";"));
+	m[0] = stocm(fe);
+	str.erase(0, fe.length());
+	}*/
+	//else -> letter cases here
+	while (str.length())
+	{
+		if (str[0] == ' ' || str[0] == ','){ if (!i) i = 1; str.erase(0, 1); }
+		else if (str[0] == ';' || str[0] == '\n') { i = 2; if (m[1].nR) m[0].addMatrixVer(m[1]);/* else cnoe = noe; if (cnoe != noe) { cout << "Input error"; return; } noe = 0;*/ m[1].reset(); x = 1; str.erase(0, 1); }
+		else if (str[0] > 47 && str[0] < 58 || str[0] == '.' || str[0] == '-')
+		{
+			//noe++;
+			string fe = str.substr(0, (str.find(" ") < str.find(";")) ? (str.find(",") < str.find(" ")) ? str.find(",") : str.find(" ") : (str.find(",") < str.find(" ")) ? str.find(",") : str.find(";"));  //str.find(" ") : str.find(";"));
+			double d = strtod(fe.c_str(), NULL);
+			CMatrix cm = d;
+			(i == 1) ? m[x].addMatrixHor(cm) : m[x] = cm;
+			str.erase(0, fe.length());
+			i = 0;
+		}
+		else if (str[0] == '[')
+		{
+			//noe++;
+			string fe = str.substr(0, str.find("]") + 1);
+			CMatrix cm = fe;
+			(i == 1) ? m[x].addMatrixHor(cm) : m[x] = cm;
+			//cout << str << " & " << i << " & " << cm << " & " << m[1] << endl;
+			str.erase(0, fe.length());
+			i = 0;
+		}
+		/*else
+		{
+		string fe = str.substr(0, (str.find(" ") < str.find(";")) ? str.find(" ") : str.find(";"));
+		CMatrix cm = stocm(fe);
+		(i == 1) ? m[x].addMatrixHor(cm) : m[x] = cm;
+		str.erase(0, fe.length());
+		i = 0;
+		}*/
+	}
+	//if (cnoe != noe) { cout << "Input error"; return; }
+	m[0].addMatrixVer(m[1]);
+	*this = m[0];
 }
 
 
@@ -1455,48 +1487,4 @@ void CMatrix::addMatrixVer(CMatrix& c)
 		}
 	}
 	copy(m);
-}
-void CMatrix::mom(string s)
-{
-	string str = s; int i = 0;
-	str.erase(0, 1); str.erase(str.length() - 1, str.length());
-	CMatrix m;
-	while (str[0] == ' ') str.erase(0, 1);
-	if (str[0] > 47 && str[0] < 58 || str[0] == '.' || str[0] == '-')
-	{
-		string fe = str.substr(0, (str.find(" ") < str.find(";")) ? str.find(" ") : str.find(";"));
-		double d = strtod(fe.c_str(), NULL);
-		m = d;
-		str.erase(0, fe.length());
-	}
-	else if (str[0] == '[')
-	{
-		string fe = str.substr(0, str.find("]") + 1);
-		m = fe;
-		str.erase(0, fe.length());
-	}
-	//else -> letter cases here
-	while (str.length())
-	{
-		if (str[0] == ' '){ if (!i) i = 1; str.erase(0, 1); }
-		else if (str[0] == ';' || str[0] == '\n') { i = 2; str.erase(0, 1); }
-		else if (str[0] > 47 && str[0] < 58 || str[0] == '.' || str[0] == '-')
-		{
-			string fe = str.substr(0, (str.find(" ") < str.find(";")) ? str.find(" ") : str.find(";"));
-			double d = strtod(fe.c_str(), NULL);
-			CMatrix cm = d;
-			(i == 1) ? m.addMatrixHor(cm) : m.addMatrixVer(cm);
-			str.erase(0, fe.length());
-			i = 0;
-		}
-		else if (str[0] == '[')
-		{
-			string fe = str.substr(0, str.find("]") + 1);
-			CMatrix cm = fe;
-			(i == 1) ? m.addMatrixHor(cm) : m.addMatrixVer(cm);
-			str.erase(0, fe.length());
-			i = 0;
-		}
-	}
-	*this = m;
 }
