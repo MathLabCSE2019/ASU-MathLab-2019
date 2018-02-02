@@ -116,7 +116,7 @@ where example.m is a test file with a given input inside
 ### User Interfacing
 * User can input more lines to the command line the same as matlab and octave but it's not a must
 * User can clear screen by typing ```clc```
-* User can exit the software by typing ```exit``` , ```Exit``` or ```0``` or ```Quit``` or ```quit```
+* User can exit the software by typing ```exit``` , ```Exit``` , ```0``` , ```Quit``` or ```quit```
 * If the user is stuck , he can type ```help``` to see all the software commands
 
 ## Our Team
