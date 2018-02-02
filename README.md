@@ -201,7 +201,7 @@ ___
 
 ## Author
 
-* Mahomoud Hamdy ([SuperMoody](https://github.com/SuperMoody))
+* [Mahmoud Hamdy](https://github.com/Mahmoud-Hamdyy)
 
 ___
 
