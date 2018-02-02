@@ -144,13 +144,12 @@ void CMatrix::copy(double d)
 void CMatrix::copy(string s)
 {
 	reset();
-	string str = s; int i = 0, x = 0;// noe = 0, cnoe = 0;
+	string str = s; int i = 0, x = 0;
 	str.erase(0, 1); str.erase(str.length() - 1, str.length());
 	CMatrix m[2];
 	while (str[0] == ' ') str.erase(0, 1);
 	if (str[0] > 47 && str[0] < 58 || str[0] == '.' || str[0] == '-')
 	{
-		//noe++;
 		string fe = str.substr(0, (str.find(" ") < str.find(";")) ? str.find(" ") : str.find(";"));
 		double d = strtod(fe.c_str(), NULL);
 		m[0] = d;
@@ -158,7 +157,6 @@ void CMatrix::copy(string s)
 	}
 	else if (str[0] == '[')
 	{
-		//noe++;
 		string fe = str.substr(0, str.find("]") + 1);
 		m[0] = fe;
 		str.erase(0, fe.length());
@@ -173,11 +171,10 @@ void CMatrix::copy(string s)
 	while (str.length())
 	{
 		if (str[0] == ' ' || str[0] == ','){ if (!i) i = 1; str.erase(0, 1); }
-		else if (str[0] == ';' || str[0] == '\n') { i = 2; if (m[1].nR) m[0].addMatrixVer(m[1]);/* else cnoe = noe; if (cnoe != noe) { cout << "Input error"; return; } noe = 0;*/ m[1].reset(); x = 1; str.erase(0, 1); }
+		else if (str[0] == ';' || str[0] == '\n') { i = 2; if (m[1].nR) { if (m[1].nC == m[0].nC) m[0].addMatrixVer(m[1]); else { cout << "Input error" << endl; return; } } m[1].reset(); x = 1; str.erase(0, 1); }
 		else if (str[0] > 47 && str[0] < 58 || str[0] == '.' || str[0] == '-')
 		{
-			//noe++;
-			string fe = str.substr(0, (str.find(" ") < str.find(";")) ? (str.find(",") < str.find(" ")) ? str.find(",") : str.find(" ") : (str.find(",") < str.find(" ")) ? str.find(",") : str.find(";"));  //str.find(" ") : str.find(";"));
+			string fe = str.substr(0, (str.find(" ") < str.find(";")) ? (str.find(",") < str.find(" ")) ? str.find(",") : str.find(" ") : (str.find(",") < str.find(" ")) ? str.find(",") : str.find(";"));
 			double d = strtod(fe.c_str(), NULL);
 			CMatrix cm = d;
 			(i == 1) ? m[x].addMatrixHor(cm) : m[x] = cm;
@@ -186,11 +183,9 @@ void CMatrix::copy(string s)
 		}
 		else if (str[0] == '[')
 		{
-			//noe++;
 			string fe = str.substr(0, str.find("]") + 1);
 			CMatrix cm = fe;
 			(i == 1) ? m[x].addMatrixHor(cm) : m[x] = cm;
-			//cout << str << " & " << i << " & " << cm << " & " << m[1] << endl;
 			str.erase(0, fe.length());
 			i = 0;
 		}
@@ -203,9 +198,8 @@ void CMatrix::copy(string s)
 		i = 0;
 		}*/
 	}
-	//if (cnoe != noe) { cout << "Input error"; return; }
-	m[0].addMatrixVer(m[1]);
-	*this = m[0];
+	if (m[1].nC == m[0].nC) { m[0].addMatrixVer(m[1]); *this = m[0]; }
+	else { cout << "Input error" << endl; return; }
 }
 
 
