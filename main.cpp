@@ -446,7 +446,7 @@ int main (int argc, char* argv[]){
             cout << "exit : exits the software (note : you can also use Exit or Quit or quit or 0)" << endl;
         }
 
-    }while(input != "exit" && input != "Exit" && input != "0");
+    }while(input != "exit" && input != "Exit" && input != "0" && input != "Quit" && input != "quit");
 
 return 0;
 }
