@@ -1,16 +1,16 @@
 ![Screenshot](g1_cover.png)
 
 ### Contents
-* [Overview](README.md#overview)
-* [Specifications](README.md#specifications)
-* [Phases](README.md#phases)
+* [Overview](#overview)
+* [Specifications](#specifications)
+* [Phases](#phases)
 * [Phase 1: Core Operations](#phase-1-core-operations)
-* [Phase 2: Advanced Operations and Tuning](README.md#phase-2-advanced-operations-and-tuning)
-* [How to use ?](README.md#how-to-use-)
-* [Our Team](README.md#our-team)
-* [Contribution](README.md#contribution)
-* [Author](README.md#author)
-* [Licence](README.md#licence)
+* [Phase 2: Advanced Operations and Tuning](#phase-2-advanced-operations-and-tuning)
+* [How to use ?](#how-to-use-)
+* [Our Team](#our-team)
+* [Contribution](#contribution)
+* [Author](#author)
+* [Licence](#licence)
 
 
 ## Overview
@@ -24,7 +24,7 @@ Implementation of a mathematical library software similar to Matlab and Octave .
 * Production to **Linux** Server ([CentOS 6.7](https://www.centos.org/))
 * Any **C/C++** IDE works under **Linux** (like [Code::Blocks](http://www.codeblocks.org/))
 * [G++](https://gcc.gnu.org/) Compiler and Makefile are required
-* Source controlling , Issues tracking and Documentation using [Git](https://git-scm.com/)**/**[GitHub](https://github.com/)
+* Source controlling , Issues tracking and Documentation using ([Git](https://git-scm.com/)**/**[GitHub](https://github.com/))
 
 ## Phases
 
@@ -115,7 +115,9 @@ where example.m is a test file with a given input inside
 
 ### User Interfacing
 * User can input more lines to the command line the same as matlab and octave but it's not a must
-* User can exit the software by typing ```exit``` , ```Exit``` or ```0```
+* User can clear screen by typing ```clc```
+* User can exit the software by typing ```exit``` , ```Exit``` or ```0``` or ```Quit``` or ```quit```
+* If the user is stuck , he can type ```help``` to see all the software commands
 
 ## Our Team
 
