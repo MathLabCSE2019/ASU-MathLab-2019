@@ -435,6 +435,16 @@ int main (int argc, char* argv[]){
                 }
            }
         }
+        if(input == "clc")
+        {
+            system("clear");
+        }
+        else if(input == "help")
+        {
+            cout << "Software Commands are : "<<endl;
+            cout << "help : show the software commands" << endl << "clc : clears the screen" << endl;
+            cout << "exit : exits the software (note : you can also use Exit or Quit or quit or 0)" << endl;
+        }
 
     }while(input != "exit" && input != "Exit" && input != "0");
 
