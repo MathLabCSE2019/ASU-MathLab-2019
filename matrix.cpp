@@ -1,5 +1,5 @@
-#include "matrix.h"
-
+#include "Matrix.h"
+#define pi 3.14
 using namespace std;
 
 
@@ -177,7 +177,8 @@ void CMatrix::copy(string s)
 			string fe = str.substr(0, (str.find(" ") < str.find(";")) ? (str.find(",") < str.find(" ")) ? str.find(",") : str.find(" ") : (str.find(",") < str.find(" ")) ? str.find(",") : str.find(";"));
 			double d = strtod(fe.c_str(), NULL);
 			CMatrix cm = d;
-			(i == 1) ? m[x].addMatrixHor(cm) : m[x] = cm;
+			int h = 0;
+			(i == 1) ? m[x].addMatrixHor(cm) : m[x].copy(cm);
 			str.erase(0, fe.length());
 			i = 0;
 		}
@@ -185,7 +186,7 @@ void CMatrix::copy(string s)
 		{
 			string fe = str.substr(0, str.find("]") + 1);
 			CMatrix cm = fe;
-			(i == 1) ? m[x].addMatrixHor(cm) : m[x] = cm;
+			(i == 1) ? m[x].addMatrixHor(cm) : m[x].copy(cm);
 			str.erase(0, fe.length());
 			i = 0;
 		}
@@ -1396,7 +1397,7 @@ CMatrix mrand(int R , int C)
 {
     if(C == 0)
     {
-        CMatrix result_matrix(R , R , MI_RAND);
+        CMatrix result_matrix(R , R , CMatrix::MI_RAND);
         return result_matrix;
     }
     else if(R == 0 && C != 0)
@@ -1405,7 +1406,7 @@ CMatrix mrand(int R , int C)
     }
     else
     {
-       CMatrix result_matrix(R , C , MI_RAND);
+       CMatrix result_matrix(R , C , CMatrix::MI_RAND);
        return result_matrix;
     }
 }
@@ -1414,12 +1415,12 @@ CMatrix eye(int R , int C)
 {
     if(C == 0)
     {
-        CMatrix result_matrix(R , R , MI_EYE);
+        CMatrix result_matrix(R , R , CMatrix::MI_EYE);
         return result_matrix;
     }
     else
     {
-        CMatrix result_matrix(R , C , MI_EYE);
+        CMatrix result_matrix(R , C , CMatrix::MI_EYE);
         return result_matrix;
     }
 }
@@ -1428,12 +1429,12 @@ CMatrix zeros(int R , int C)
 {
     if(C == 0)
     {
-        CMatrix result_matrix(R , R , MI_ZEROS);
+        CMatrix result_matrix(R , R , CMatrix::MI_ZEROS);
         return result_matrix;
     }
     else
     {
-        CMatrix result_matrix(R , C , MI_ZEROS);
+        CMatrix result_matrix(R , C , CMatrix::MI_ZEROS);
         return result_matrix;
     }
 }
@@ -1442,12 +1443,12 @@ CMatrix ones(int R , int C)
 {
     if(C == 0)
     {
-        CMatrix result_matrix(R , R , MI_ONES);
+        CMatrix result_matrix(R , R , CMatrix::MI_ONES);
         return result_matrix;
     }
     else
     {
-        CMatrix result_matrix(R , C , MI_ONES);
+        CMatrix result_matrix(R , C , CMatrix::MI_ONES);
         return result_matrix;
     }
 }
