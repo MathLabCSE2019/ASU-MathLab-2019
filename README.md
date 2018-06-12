@@ -128,11 +128,10 @@ Grouping is based on [responsibilities distribution of Phase 2](https://github.c
 * Mahmoud Hamdy
 * Mohamed El Morsy
 * Ahmed Tolba
-* Mohamed El Morsy
 * Menna Mohamed
 
 ### Group 2
-* Menna Adel
+* Mennah Adel
 * Nourhan Nasr
 
 ### Group 3
@@ -203,7 +202,7 @@ ___
 
 ## Author
 
-* [Mahmoud Hamdy](https://github.com/Mahmoud-Hamdyy)
+* [Mahmoud Hamdy](https://github.com/SuperMoody)
 
 ___
 
